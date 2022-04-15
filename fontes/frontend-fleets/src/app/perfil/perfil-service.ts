@@ -13,7 +13,7 @@ export class PerfilService {
   constructor(private http: HttpClient) { }
 
   public listarTodos(): Observable<Perfil[]> {
-    return this.http.get<Perfil[]>(this.url + "/perfis");
+    return this.http.get<Perfil[]>(this.url + "/perfis/");
   }
 
   public pesquisarPerfil(sigla: string, descricao: string): Observable<Perfil[]> {

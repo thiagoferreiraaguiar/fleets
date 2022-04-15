@@ -4,7 +4,5 @@ export class Perfil {
     public sigla: string = "";
     public descricao: string = "";
 
-    constructor() {
-
-    }
+    constructor() { }
 }
