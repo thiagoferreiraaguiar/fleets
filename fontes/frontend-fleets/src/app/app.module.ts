@@ -12,6 +12,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MenuComponent } from './menu/menu.component';
 import { AuthGuard } from './security/auth-guard';
+import { AuthInterceptor } from './security/auth-interceptor';
 
 
 @NgModule({
@@ -30,7 +31,11 @@ import { AuthGuard } from './security/auth-guard';
     ReactiveFormsModule,
     SharedModule
   ],
-  providers: [AuthGuard],
+  providers: [AuthGuard, {
+    provide: HTTP_INTERCEPTORS,
+    useClass: AuthInterceptor,
+    multi: true
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

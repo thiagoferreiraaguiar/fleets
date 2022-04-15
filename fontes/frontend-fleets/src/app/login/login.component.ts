@@ -41,7 +41,7 @@ export class LoginComponent implements OnInit {
     this.disabledButton = true;
     this.labelButton = "";
 
-    this.loginService.efetuarLogin(form.value).subscribe((currentUser: any) => {
+    this.loginService.efetuarLogin(form.value).subscribe((currentUser: CurrentUser) => {
       if (currentUser != null) {
         this.adicionarUsuarioSessao(currentUser);
         this.router.navigate(['/home']);
