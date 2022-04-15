@@ -1,0 +1,38 @@
+<form id="formulario" #f="ngForm" (ngSubmit)="efetuarLogin(f)">
+  <p-card class="cardLogin">
+    <div class="grid p-fluid">
+      <div class="col-5 flex align-items-center justify-content-end">
+          <img src="../../assets/img/logo3.png" alt="Logo" height="130" width="130">
+      </div>
+
+      <div class="col-2">
+        <p-divider layout="vertical"></p-divider>
+      </div>
+
+      <div class="col-5 flex align-items-center justify-content-left">
+        <div class="p-fluid">
+          <div class="field">
+            <div class="p-inputgroup">
+              <span class="p-inputgroup-addon"><i class="pi pi-user"></i></span>
+              <input id="email" name="email" size="40" type="email" pInputText [(ngModel)]="jwtAutenticationRequest.email">
+            </div>            
+          </div>
+          <div class="field">
+            <div class="p-inputgroup">
+              <span class="p-inputgroup-addon"><i class="pi pi-unlock"></i></span>
+              <input id="senha" name="senha" type="password" pPassword [feedback]=false
+                [(ngModel)]="jwtAutenticationRequest.senha" />
+            </div>
+          </div>
+          <p-button type="submit" [label]="labelButton" [disabled]="disabledButton">
+            <i *ngIf="disabledButton" class="pi pi-spin pi-spinner"></i>
+          </p-button>
+        </div>
+      </div>
+    </div>
+  </p-card>
+
+  <div *ngIf="showMsgErro" class="mensageLogin">
+    <p-messages [(value)]="msgs"></p-messages>
+  </div>
+</form>

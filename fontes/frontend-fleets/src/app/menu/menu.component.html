@@ -1,0 +1,9 @@
+<p-menubar *ngIf="usuarioLogado.isLogado()" [model]="items">
+    <ng-template pTemplate="start">
+        <img src="../../assets/img/logo_menu.png" height="40" class="mr-2">
+    </ng-template>
+    <div>
+        <p-splitButton [label]="siglaNome" icon="pi pi-cog" styleClass="ui-button-secondary" [model]="itemsUsuario">
+        </p-splitButton>
+    </div>
+</p-menubar>
