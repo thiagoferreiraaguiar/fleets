@@ -21,7 +21,7 @@ export class PerfilService {
       .set('sigla', sigla)
       .set('descricao', descricao);
 
-    return this.http.get<Perfil[]>(this.url + '/perfis/pesquisarPerfilUsuario', { params });
+    return this.http.get<Perfil[]>(this.url + '/perfis/filter', { params });
   }
 
   public getPerfilUsuario(idPerfil: number) {
