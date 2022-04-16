@@ -34,8 +34,7 @@
             </div>
         </div>
         <p-footer>
-            <div style="text-align: right;">
-                <p-button icon="pi pi-arrow-left" label="Voltar" [routerLink]="pageList" style="margin-right: .25em"></p-button>
+            <div style="text-align: right;">  
                 <p-button icon="pi pi-file" label="Novo" (click)="novoPerfil()" *ngIf="isAtualizacao;" style="margin-right: .25em"></p-button>
                 <p-button icon="pi pi-trash" label="Excluir" *ngIf="isAtualizacao" style="margin-right: .25em" [disabled]="disabledButton"
                     (click)="excluirPerfil(id)"></p-button>

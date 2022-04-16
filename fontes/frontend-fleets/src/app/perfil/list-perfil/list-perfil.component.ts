@@ -29,7 +29,7 @@ export class ListPerfilComponent implements OnInit {
 
   ngOnInit() {
     this.pageForm = "/form-perfil";
-    this.qtdRows = 10;
+    this.qtdRows = 6;
     this.util = new Util();
 
     // listar todos perfils
