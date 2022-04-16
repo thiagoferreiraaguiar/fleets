@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Perfil } from 'src/app/model/perfil';
-import { Util } from 'src/app/util/util';
 import { PerfilService } from '../perfil-service';
 
 @Component({
@@ -16,33 +15,29 @@ export class ListPerfilComponent implements OnInit {
     private router: Router
   ) { }
 
-  sigla: string= "";
-  descricao: string= "";
-
-  pageForm: string= "";
+  sigla: string = "";
+  descricao: string = "";
+  pageForm: string = "";
   perfils: Perfil[] = [];
 
-  // paginacao
-  util: Util = new Util();
-  qtdRows: number = 0;
-  textPaginacao: string = "";
+  //paginacao
+  first: number = 0;
+  rows: number = 0;
 
   ngOnInit() {
     this.pageForm = "/form-perfil";
-    this.qtdRows = 6;
-    this.util = new Util();
+    this.first = 0;
+    this.rows = 9;
 
     // listar todos perfils
     this.perfilService.listarTodos().subscribe((response: Perfil[]) => {
       this.perfils = response;
-      this.textPaginacao = this.util.showLabelPaginate(0, this.perfils.length, this.qtdRows);
     });
   }
 
   public pesquisarPerfil() {
     this.perfilService.pesquisarPerfil(this.sigla, this.descricao).subscribe((response: Perfil[]) => {
       this.perfils = response;
-      this.textPaginacao = this.util.showLabelPaginate(0, this.perfils.length, this.qtdRows);
     });
   }
 
@@ -50,8 +45,24 @@ export class ListPerfilComponent implements OnInit {
     this.router.navigate([this.pageForm + "/" + event.data.id]);
   }
 
-  public paginate(event: any) {
-    this.textPaginacao = this.util.showLabelPaginate(event.first, this.perfils.length, this.qtdRows);
+  next() {
+    this.first = this.first + this.rows;
+  }
+
+  prev() {
+    this.first = this.first - this.rows;
+  }
+
+  reset() {
+    this.first = 0;
+  }
+
+  isLastPage(): boolean {
+    return this.perfils ? this.first === (this.perfils.length - this.rows) : true;
+  }
+
+  isFirstPage(): boolean {
+    return this.perfils ? this.first === 0 : true;
   }
 
 }
