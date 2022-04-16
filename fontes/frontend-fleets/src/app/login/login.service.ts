@@ -15,6 +15,6 @@ export class LoginService {
   constructor(private http: HttpClient) { }
 
   public efetuarLogin(jwtAutenticationRequest: JwtAutenticationRequest): Observable<CurrentUser> {
-    return this.http.post<CurrentUser>(this.url + '/usuarios/login', jwtAutenticationRequest);
+    return this.http.post<CurrentUser>(this.url + '/auth', jwtAutenticationRequest);
   }
 }

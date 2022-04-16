@@ -1,5 +1,5 @@
 export class JwtAutenticationRequest {
-    public email: string = "";
+    public login: string = "";
     public senha: string = "";
 
     public constructor() {
