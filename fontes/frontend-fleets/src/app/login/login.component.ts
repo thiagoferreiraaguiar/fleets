@@ -20,7 +20,6 @@ export class LoginComponent implements OnInit {
   msgs: Message[] = [];
   showMsgErro: boolean = false;
   disabledButton: boolean = false;
-  labelButton: string = "";
 
   constructor(
     private loginService: LoginService,
@@ -32,14 +31,12 @@ export class LoginComponent implements OnInit {
     this.jwtAutenticationRequest.senha = "1234";
 
     this.usuarioLogado = UsuarioLogado.getInstance();
-    this.labelButton = "Login";
     this.showMsgErro = false;
     this.disabledButton = false;
   }
 
   public efetuarLogin(form: NgForm): void {
     this.disabledButton = true;
-    this.labelButton = "";
 
     this.loginService.efetuarLogin(form.value).subscribe((currentUser: CurrentUser) => {
       if (currentUser != null) {
@@ -58,7 +55,6 @@ export class LoginComponent implements OnInit {
     this.msgs = [];
     this.disabledButton = false;
     this.showMsgErro = true;
-    this.labelButton = "Logar";
     this.msgs.push({ severity: 'error', summary: 'Erro: ', detail: message });
     this.usuarioLogado.usuario = new Usuario();
     this.usuarioLogado.token = "";

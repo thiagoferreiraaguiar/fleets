@@ -16,8 +16,6 @@ export class ListPerfilComponent implements OnInit {
     private router: Router
   ) { }
 
-  titlePage: string = "";
-
   sigla: string= "";
   descricao: string= "";
 
@@ -30,7 +28,6 @@ export class ListPerfilComponent implements OnInit {
   textPaginacao: string = "";
 
   ngOnInit() {
-    this.titlePage = "Perfil";
     this.pageForm = "/form-perfil";
     this.qtdRows = 10;
     this.util = new Util();
