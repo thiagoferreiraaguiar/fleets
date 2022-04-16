@@ -13,6 +13,7 @@ import { AppComponent } from './app.component';
 import { MenuComponent } from './menu/menu.component';
 import { AuthGuard } from './security/auth-guard';
 import { AuthInterceptor } from './security/auth-interceptor';
+import { FormPerfilComponent } from './perfil/form-perfil/form-perfil.component';
 
 
 @NgModule({

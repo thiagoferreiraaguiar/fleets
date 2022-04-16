@@ -47,7 +47,7 @@ export class ListPerfilComponent implements OnInit {
   }
 
   public exibirDadosPerfil(event: any) {
-    this.router.navigate([this.pageForm + "/" + event.data.idPerfil]);
+    this.router.navigate([this.pageForm + "/" + event.data.id]);
   }
 
   public paginate(event: any) {

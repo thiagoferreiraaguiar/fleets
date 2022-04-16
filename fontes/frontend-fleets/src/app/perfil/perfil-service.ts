@@ -24,12 +24,12 @@ export class PerfilService {
     return this.http.get<Perfil[]>(this.url + '/perfis/filter', { params });
   }
 
-  public getPerfilUsuario(idPerfil: number) {
-    return this.http.get(this.url + "/perfis/" + idPerfil);
+  public getPerfil(idPerfil: number): Observable<Perfil> {
+    return this.http.get<Perfil>(this.url + "/perfis/" + idPerfil);
   }
 
-  public cadastrarPerfil(perfil: Perfil) {
-    return this.http.post(this.url + "/perfis", perfil);
+  public cadastrarPerfil(perfil: Perfil): Observable<Perfil> {
+    return this.http.post<Perfil>(this.url + "/perfis", perfil);
   }
 
   public excluirPerfil(idPerfil: number) {
