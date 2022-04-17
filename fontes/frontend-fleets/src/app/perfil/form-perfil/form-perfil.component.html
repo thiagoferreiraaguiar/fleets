@@ -21,7 +21,7 @@
             <div class="col-3">
                 <span style="color: red;" *ngIf="!form.controls['sigla'].valid && form.controls['sigla'].dirty"
                     [innerHTML]="form.get('sigla')?.errors?.['required'] ? 'Campo obrigatório' 
-                        : form.get('sigla')?.errors?.['minlength'] ? 'O número mínimo de caracteres é 5' 
+                        : form.get('sigla')?.errors?.['minlength'] ? 'O número mínimo de caracteres é 3' 
                         : form.get('sigla')?.errors?.['maxlength'] ? 'O número máximo de caracteres é 10' 
                         : ''">
                 </span>
@@ -34,11 +34,11 @@
             </div>
         </div>
         <p-footer>
-            <div style="text-align: right;">  
-                <p-button icon="pi pi-file" label="Novo" (click)="novoPerfil()" *ngIf="isAtualizacao;" style="margin-right: .25em"></p-button>
-                <p-button icon="pi pi-trash" label="Excluir" *ngIf="isAtualizacao" style="margin-right: .25em" [disabled]="disabledButton"
+            <div div class="text-right">
+                <p-button class="espacoButton" icon="pi pi-file" label="Novo" (click)="novoPerfil()" *ngIf="isAtualizacao;"></p-button>
+                <p-button class="espacoButton" icon="pi pi-trash" label="Excluir" *ngIf="isAtualizacao" [disabled]="disabledButton"
                     (click)="excluirPerfil(id)"></p-button>
-                <p-button icon="pi pi-save" type="submit" label="Atualizar" [disabled]="!form.valid || disabledButton"
+                <p-button class="espacoButton" icon="pi pi-save" type="submit" label="Atualizar" [disabled]="!form.valid || disabledButton"
                     *ngIf="isAtualizacao"></p-button>
                 <p-button icon="pi pi-save" type="submit" label="Cadastrar" [disabled]="!form.valid || disabledButton"
                     *ngIf="!isAtualizacao"></p-button>

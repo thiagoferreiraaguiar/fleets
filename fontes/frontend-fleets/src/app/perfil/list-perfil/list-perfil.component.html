@@ -1,4 +1,4 @@
-<p-panel header="Perfil" [toggleable]="true" [collapsed]="true">
+<p-panel header="Perfil">
   <div class="grid p-fluid">
     <div class="col-3">
       <label for="sigla">Sigla</label>
@@ -15,7 +15,7 @@
   </div>
   <p-footer>
     <div style="text-align: right;">
-      <p-button icon="pi pi-file" label="Novo" [routerLink]="pageForm" style="margin-right: .25em"></p-button>
+      <p-button class="espacoButton" icon="pi pi-file" label="Novo" [routerLink]="pageForm"></p-button>
       <p-button icon="pi pi-search" label="Pesquisar" (click)="pesquisarPerfil()"></p-button>
     </div>
   </p-footer>
@@ -28,14 +28,14 @@
   [showCurrentPageReport]="true" currentPageReportTemplate="Exibindo {first} a {last} de {totalRecords} perfis">
   <ng-template pTemplate="header">
     <tr>
-      <th style="width: 30%;">Sigla</th>
-      <th>Descrição</th>
+      <th  style="width: 30%;text-align: center;">Sigla</th>
+      <th style="text-align: center;">Descrição</th>
     </tr>
   </ng-template>
   <ng-template pTemplate="body" let-perfil>
     <tr [pSelectableRow]="perfil">
       <td style="text-align: center;">{{perfil.sigla}}</td>
-      <td>{{perfil.descricao}}</td>
+      <td style="text-align: center;">{{perfil.descricao}}</td>
     </tr>
   </ng-template>
 </p-table>

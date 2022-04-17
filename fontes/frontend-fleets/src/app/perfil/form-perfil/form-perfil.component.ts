@@ -57,7 +57,7 @@ export class FormPerfilComponent implements OnInit {
   private createForm() {
     this.form = new FormGroup({
       id: new FormControl(),
-      sigla: new FormControl('', [Validators.required, Validators.minLength(5), Validators.maxLength(10)]),
+      sigla: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(10)]),
       descricao: new FormControl('', Validators.required)
     });
   }
@@ -82,12 +82,10 @@ export class FormPerfilComponent implements OnInit {
   public excluirPerfil(id: number): void {
     this.msgs = [];
     this.disabledButton = true;
-    this.perfilService.excluirPerfil(id).subscribe((response: any) => {
-      if (response.errors == null) {
-        this.showMessageError = false;
-        this.isExclusao = true;
-        this.messageService.add({ severity: 'success', detail: 'Perfil excluido com sucesso!' });
-      }
+    this.perfilService.excluirPerfil(id).subscribe(() => {
+      this.showMessageError = false;
+      this.isExclusao = true;
+      this.messageService.add({ severity: 'success', detail: 'Perfil excluido com sucesso!' });
     }, err => {
       this.showMessageError = true;
       this.msgs.push({ severity: 'error', detail: 'Não foi possível excluir o perfil.' });

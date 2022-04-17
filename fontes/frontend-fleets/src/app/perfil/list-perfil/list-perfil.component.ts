@@ -27,7 +27,7 @@ export class ListPerfilComponent implements OnInit {
   ngOnInit() {
     this.pageForm = "/form-perfil";
     this.first = 0;
-    this.rows = 9;
+    this.rows = 6;
 
     // listar todos perfils
     this.perfilService.listarTodos().subscribe((response: Perfil[]) => {
