@@ -11,24 +11,16 @@ export class MenuComponent implements OnInit {
 
   items: MenuItem[] = [];
   itemsUsuario: MenuItem[] = [];
-  siglaNome: string = ""
+  siglaNome: string = "";
   usuarioLogado: UsuarioLogado = new UsuarioLogado();
+  infoUsuarios: string = "";
 
   constructor() { }
 
   ngOnInit() {
     this.addItensMenu();
-    this.addItensUsuario();
     this.usuarioLogado = UsuarioLogado.getInstance();
-    this.usuarioLogado.exibeMenu.subscribe((show: boolean) => {
-      if (show) {
-        // Letras iniciais
-        let array = this.usuarioLogado.usuario.nome.replace(/\s(de|da|dos|das)\s/g, ' ').split(" ");
-        array.forEach(element => {
-          this.siglaNome += element.charAt(0);
-        });
-      }
-    });
+    this.usuarioLogado.exibeMenu.subscribe((show: boolean) => {});
   }
 
   private addItensMenu(): void {
@@ -51,13 +43,8 @@ export class MenuComponent implements OnInit {
     ];
   }
 
-  private addItensUsuario() {
-    this.itemsUsuario = [
-      { label: 'Alterar e-mail', icon: 'pi pi-envelope', routerLink: ['/altera-email'] },
-      { label: 'Alterar senha', icon: 'pi pi-lock', routerLink: ['/altera-senha'] },
-      { separator: true },
-      { label: 'Sair', icon: 'pi pi-fw pi-power-off', routerLink: '' }
-    ];
+  public getInformacaoesUsuario(){
+    this.infoUsuarios = this.usuarioLogado.usuario.email;
   }
 
 }

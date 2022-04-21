@@ -2,8 +2,7 @@
     <ng-template pTemplate="start">
         <img src="../../assets/img/logo_menu.png" height="40" class="mr-2">
     </ng-template>
-    <div>
-        <p-splitButton [label]="siglaNome" icon="pi pi-cog" styleClass="ui-button-secondary" [model]="itemsUsuario">
-        </p-splitButton>
-    </div>
+    <ng-template pTemplate="end">
+        <p-button icon="pi pi-sign-out" styleClass="p-button-link" label="Sair"></p-button>
+    </ng-template>
 </p-menubar>
