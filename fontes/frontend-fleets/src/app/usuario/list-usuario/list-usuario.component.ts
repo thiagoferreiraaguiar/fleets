@@ -65,7 +65,7 @@ export class ListUsuarioComponent implements OnInit {
   }
 
   public exibirDadosUsuario(event: any) {
-    this.router.navigate([this.pageForm + "/" + event.data.idUsuario]);
+    this.router.navigate([this.pageForm + "/" + event.data.id]);
   }
 
   public onChangeStatus() {

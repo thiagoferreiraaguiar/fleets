@@ -21,8 +21,8 @@ export class FormPerfilComponent implements OnInit {
   ) { }
 
   form: FormGroup = new FormGroup({});
-  pageForm: string = "";
-  pageList: string = "";
+  pageForm: string = "/form-perfil";
+  pageList: string = "/list-perfil";
   msgs: Message[] = [];
   showMessageError: boolean = false;
   isExclusao: boolean = false;
@@ -31,14 +31,6 @@ export class FormPerfilComponent implements OnInit {
   id: number = 0;
 
   ngOnInit() {
-    this.pageForm = "/form-perfil";
-    this.pageList = "/list-perfil";
-    this.showMessageError = false;
-    this.isExclusao = false;
-    this.isAtualizacao = false;
-    this.disabledButton = false;
-    this.id = 0;
-
     this.createForm();
 
     // pega o id do perfil 
