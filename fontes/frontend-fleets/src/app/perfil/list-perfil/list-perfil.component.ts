@@ -15,14 +15,18 @@ export class ListPerfilComponent implements OnInit {
     private router: Router
   ) { }
 
+  // campos pesquisa
   sigla: string = "";
   descricao: string = "";
+
+  // paginas
   pageForm: string = "";
-  perfils: Perfil[] = [];
 
   //paginacao
   first: number = 0;
   rows: number = 0;
+
+  perfils: Perfil[] = [];
 
   ngOnInit() {
     this.pageForm = "/form-perfil";

@@ -8,6 +8,8 @@ import { InputTextModule } from 'primeng/inputtext';
 import { PanelModule } from 'primeng/panel';
 import { TableModule } from 'primeng/table';
 import { ListUsuarioRoutingModule } from './list-usuario-routing.module';
+import {DropdownModule} from 'primeng/dropdown';
+import {CheckboxModule} from 'primeng/checkbox';
 
 
 
@@ -20,7 +22,9 @@ import { ListUsuarioRoutingModule } from './list-usuario-routing.module';
     ButtonModule,
     InputTextModule,
     FormsModule,
-    TableModule
+    TableModule,
+    DropdownModule,
+    CheckboxModule
   ],
   exports: [ListUsuarioComponent],
   providers: [UsuarioService]
