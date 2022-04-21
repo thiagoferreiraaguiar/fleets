@@ -1,8 +1,8 @@
 <form id="formulario" #f="ngForm" (ngSubmit)="efetuarLogin(f)">
-  <p-card class="cardLogin">
+  <p-card class="cardLogin" [style]="{'background-color': 'whitesmoke'}">
     <div class="grid p-fluid">
       <div class="col-4 flex align-items-center justify-content-end">
-          <img src="../../assets/img/logo3.png" alt="Logo" height="130" width="130">
+        <img src="../../assets/img/logo_color.png" alt="Logo" height="130" width="130">
       </div>
 
       <div class="col-2">
@@ -14,8 +14,9 @@
           <div class="field">
             <div class="p-inputgroup">
               <span class="p-inputgroup-addon"><i class="pi pi-user"></i></span>
-              <input id="login" name="login" size="40" type="email" pInputText [(ngModel)]="jwtAutenticationRequest.login">
-            </div>            
+              <input id="login" name="login" size="40" type="email" pInputText
+                [(ngModel)]="jwtAutenticationRequest.login">
+            </div>
           </div>
           <div class="field">
             <div class="p-inputgroup">
@@ -24,7 +25,7 @@
                 [(ngModel)]="jwtAutenticationRequest.senha" />
             </div>
           </div>
-          <p-button type="submit"  label="Login" [disabled]="disabledButton">
+          <p-button type="submit" label="Login" [disabled]="disabledButton">
             <i *ngIf="disabledButton" class="pi pi-spin pi-spinner"></i>
           </p-button>
         </div>

@@ -1,4 +1,4 @@
-<p-menubar *ngIf="usuarioLogado.isLogado()" [model]="items">
+<p-menubar [style]="{'background-color': 'whitesmoke'}" *ngIf="usuarioLogado.isLogado()" [model]="items">
     <ng-template pTemplate="start">
         <img src="../../assets/img/logo_menu.png" height="40" class="mr-2">
     </ng-template>
