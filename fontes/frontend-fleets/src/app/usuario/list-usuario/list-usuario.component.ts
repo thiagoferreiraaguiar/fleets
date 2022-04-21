@@ -21,8 +21,8 @@ export class ListUsuarioComponent implements OnInit {
   // campos pesquisa
   nome: string = "";
   email: string = "";
-  idPerfil: number = 0;
-  ativo: any;
+  perfilSelecionado: Perfil = new Perfil();
+  ativo: boolean = true;
   labelStatus: string = "";
 
   //paginacao
@@ -54,7 +54,12 @@ export class ListUsuarioComponent implements OnInit {
   }
 
   public pesquisarUsuario() {
-    this.usuarioService.pesquisarUsuario(this.nome, this.email, this.idPerfil, this.ativo).subscribe((response: Usuario[]) => {
+    let idPerfil: number = 0;
+    if (this.perfilSelecionado != null) {
+      idPerfil = this.perfilSelecionado.id;
+    }
+
+    this.usuarioService.pesquisarUsuario(this.nome, this.email, idPerfil, this.ativo).subscribe((response: Usuario[]) => {
       this.usuarios = response;
     });
   }

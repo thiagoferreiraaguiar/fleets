@@ -8,8 +8,8 @@ import { InputTextModule } from 'primeng/inputtext';
 import { PanelModule } from 'primeng/panel';
 import { TableModule } from 'primeng/table';
 import { ListUsuarioRoutingModule } from './list-usuario-routing.module';
-import {DropdownModule} from 'primeng/dropdown';
-import {CheckboxModule} from 'primeng/checkbox';
+import { DropdownModule } from 'primeng/dropdown';
+import { TriStateCheckboxModule } from 'primeng/tristatecheckbox';
 
 
 
@@ -24,7 +24,7 @@ import {CheckboxModule} from 'primeng/checkbox';
     FormsModule,
     TableModule,
     DropdownModule,
-    CheckboxModule
+    TriStateCheckboxModule
   ],
   exports: [ListUsuarioComponent],
   providers: [UsuarioService]
