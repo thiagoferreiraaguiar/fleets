@@ -1,7 +1,7 @@
 <form header="Usuário" [formGroup]="form" (ngSubmit)="cadastrarUsuario()">
     <p-panel header="Usuário">
+        <input type="hidden" id="id" name="id" pInputText formControlName="id">
         <div class="grid p-fluid">
-            <input type="hidden" id="id" name="id" pInputText formControlName="id">
             <div class="col-4">
                 <label for="nome">* Nome</label>
             </div>
@@ -24,13 +24,13 @@
             </div>
         </div>
         <div class="grid p-fluid">
-            <div class="col-6">
+            <div class="col-4">
                 <span style="color: red;" *ngIf="!form.controls['nome'].valid && form.controls['nome'].dirty"
                     [innerHTML]="form.get('nome')?.errors?.['required'] ? 'Campo obrigatório' 
                         : ''">
                 </span>
             </div>
-            <div class="col-6">
+            <div class="col-4">
                 <span style="color: red;" *ngIf="!form.controls['email'].valid && form.controls['email'].dirty"
                     [innerHTML]="form.get('email')?.errors?.['required'] ? 'Campo obrigatório' 
                         : ''">
@@ -69,7 +69,8 @@
                     formControlName="confirmaSenha" />
             </div>
             <div class="col-4">
-                <p-checkbox [binary]="true" formControlName="ativo" label="{{labelStatus}}" (onChange)="onChangeStatus()">
+                <p-checkbox [binary]="true" formControlName="ativo" label="{{labelStatus}}"
+                    (onChange)="onChangeStatus()">
                 </p-checkbox>
             </div>
         </div>
@@ -81,20 +82,22 @@
                 </span>
                 <div class="col-2">
                     <span style="color: red;" *ngIf="!form.controls['senha'].valid && form.controls['senha'].dirty"
-                        [innerHTML]="form.get('senha')?.errors?.['required'] ? 'Campo obrigatório' 
-                            : ''">
+                        [innerHTML]="form.get('senha')?.errors?.['minlength'] ? 'O número mínimo de caracteres é 4' 
+                        : form.get('senha')?.errors?.['maxlength'] ? 'O número máximo de caracteres é 10' 
+                        : ''">
                     </span>
                 </div>
                 <div class="col-2">
-                    <span style="color: red;"
-                        *ngIf="!form.controls['confirmaSenha'].valid && form.controls['confirmaSenha'].dirty"
-                        [innerHTML]="form.get('confirmaSenha')?.errors?.['required'] ? 'Campo obrigatório' 
-                            : ''">
+                    <span style="color: red;" *ngIf="!form.controls['confirmaSenha'].valid && form.controls['confirmaSenha'].dirty"
+                        [innerHTML]="form.get('confirmaSenha')?.errors?.['minlength'] ? 'O número mínimo de caracteres é 4' 
+                        : form.get('confirmaSenha')?.errors?.['maxlength'] ? 'O número máximo de caracteres é 10' 
+                        : ''">
                     </span>
                 </div>
+                <div class="col-4"></div>
             </div>
         </div>
-       
+
         <p-footer>
             <div style="text-align: right;">
                 <p-button class="espacoButton" icon="pi pi-file" label="Novo" (click)="novoUsuario()"

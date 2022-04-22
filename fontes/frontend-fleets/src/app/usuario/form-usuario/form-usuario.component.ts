@@ -65,8 +65,8 @@ export class FormUsuarioComponent implements OnInit {
       cpf: new FormControl('', [Validators.required]),
       email: new FormControl('', Validators.required),
       ativo: new FormControl(true),
-      senha: new FormControl('', Validators.required),
-      confirmaSenha: new FormControl('', Validators.required)
+      senha: new FormControl('',[Validators.minLength(4), Validators.maxLength(10)]),
+      confirmaSenha: new FormControl('',[Validators.minLength(4), Validators.maxLength(10)]),
     });
   }
 
@@ -120,7 +120,7 @@ export class FormUsuarioComponent implements OnInit {
     this.isAtualizacao = true;
 
     this.form.setValue({
-      id: new FormControl(),
+      id: usuario.id,
       nome: usuario.nome,
       perfil: usuario.perfil,
       cpf: usuario.cpf,

@@ -15,6 +15,7 @@ import { FormUsuarioRoutingModule } from './form-usuario-routing.module';
 import { FormUsuarioComponent } from './form-usuario.component';
 import { CheckboxModule } from 'primeng/checkbox';
 import { InputMaskModule } from 'primeng/inputmask';
+import {CalendarModule} from 'primeng/calendar';
 
 
 
@@ -33,7 +34,8 @@ import { InputMaskModule } from 'primeng/inputmask';
     DropdownModule,
     ReactiveFormsModule,
     CheckboxModule,
-    InputMaskModule
+    InputMaskModule,
+    CalendarModule
   ],
   exports: [FormUsuarioComponent],
   providers: [UsuarioService, PerfilService, MessageService]
