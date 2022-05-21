@@ -8,6 +8,9 @@ import { PanelModule } from 'primeng/panel';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { TableModule } from 'primeng/table';
+import { ConfirmationService, MessageService } from 'primeng/api';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { ToastModule } from 'primeng/toast';
 
 @NgModule({
   declarations: [ListPerfilComponent],
@@ -17,10 +20,12 @@ import { TableModule } from 'primeng/table';
     PanelModule,
     ButtonModule,
     InputTextModule,
+    ConfirmDialogModule,
+    ToastModule,
     FormsModule,
     TableModule
   ],
   exports: [ListPerfilComponent],
-  providers: [PerfilService]
+  providers: [PerfilService, MessageService, ConfirmationService]
 })
 export class ListPerfilModule { }

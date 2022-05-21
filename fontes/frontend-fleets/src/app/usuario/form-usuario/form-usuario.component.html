@@ -46,11 +46,8 @@
             <div class="col-4">
                 <label for="perfil">* Perfil</label>
             </div>
-            <div class="col-2">
-                <label for="senha">* Senha</label>
-            </div>
-            <div class="col-2">
-                <label for="confirmaSenha">* Confirma Senha</label>
+            <div class="col-4">
+                <label for="dataNascimento">* Data de Nascimento</label>
             </div>
             <div class="col-4">
                 <label for="status">Status</label>
@@ -61,12 +58,9 @@
                 <p-dropdown [options]="perfis" [(ngModel)]="perfilSelecionado" placeholder="Selecione"
                     optionLabel="descricao" [showClear]="true" formControlName="perfil"></p-dropdown>
             </div>
-            <div class="col-2">
-                <input id="senha" name="senha" type="password" pInputText formControlName="senha" />
-            </div>
-            <div class="col-2">
-                <input id="confirmaSenha" name="confirmaSenha" type="password" pInputText
-                    formControlName="confirmaSenha" />
+            <div class="col-4">
+                <p-calendar id="dataNascimento"  name="dataNascimento" dateFormat="dd/mm/yy"
+                    formControlName="dataNascimento" [showIcon]="true" inputId="icon"></p-calendar>
             </div>
             <div class="col-4">
                 <p-checkbox [binary]="true" formControlName="ativo" label="{{labelStatus}}"
@@ -80,22 +74,51 @@
                     [innerHTML]="form.get('perfil')?.errors?.['required'] ? 'Campo obrigatório' 
                         : ''">
                 </span>
-                <div class="col-2">
-                    <span style="color: red;" *ngIf="!form.controls['senha'].valid && form.controls['senha'].dirty"
-                        [innerHTML]="form.get('senha')?.errors?.['minlength'] ? 'O número mínimo de caracteres é 4' 
-                        : form.get('senha')?.errors?.['maxlength'] ? 'O número máximo de caracteres é 10' 
-                        : ''">
-                    </span>
-                </div>
-                <div class="col-2">
-                    <span style="color: red;" *ngIf="!form.controls['confirmaSenha'].valid && form.controls['confirmaSenha'].dirty"
-                        [innerHTML]="form.get('confirmaSenha')?.errors?.['minlength'] ? 'O número mínimo de caracteres é 4' 
-                        : form.get('confirmaSenha')?.errors?.['maxlength'] ? 'O número máximo de caracteres é 10' 
-                        : ''">
-                    </span>
-                </div>
-                <div class="col-4"></div>
             </div>
+            <div class="col-4">
+                <span style="color: red;"
+                    *ngIf="!form.controls['dataNascimento'].valid && form.controls['dataNascimento'].dirty" [innerHTML]="form.get('dataNascimento')?.errors?.['required'] ? 'Campo obrigatório' 
+                    : ''">
+                </span>
+            </div>
+            <div class="col-4"></div>
+        </div>
+
+        <div class="grid p-fluid">
+            <div class="col-4">
+                <label for="senha">* Senha</label>
+            </div>
+            <div class="col-4">
+                <label for="confirmaSenha">* Confirma Senha</label>
+            </div>
+            <div class="col-4"></div>
+        </div>
+        <div class="grid p-fluid">
+            <div class="col-4">
+                <input id="senha" name="senha" type="password" pInputText formControlName="senha" />
+            </div>
+            <div class="col-4">
+                <input id="confirmaSenha" name="confirmaSenha" type="password" pInputText
+                    formControlName="confirmaSenha" />
+            </div>
+            <div class="col-4"></div>
+        </div>
+        <div class="grid p-fluid">
+            <div class="col-4">
+                <span style="color: red;" *ngIf="!form.controls['senha'].valid && form.controls['senha'].dirty"
+                    [innerHTML]="form.get('senha')?.errors?.['minlength'] ? 'O número mínimo de caracteres é 4' 
+                    : form.get('senha')?.errors?.['maxlength'] ? 'O número máximo de caracteres é 10' 
+                    : ''">
+                </span>
+            </div>
+            <div class="col-4">
+                <span style="color: red;"
+                    *ngIf="!form.controls['confirmaSenha'].valid && form.controls['confirmaSenha'].dirty" [innerHTML]="form.get('confirmaSenha')?.errors?.['minlength'] ? 'O número mínimo de caracteres é 4' 
+                    : form.get('confirmaSenha')?.errors?.['maxlength'] ? 'O número máximo de caracteres é 10' 
+                    : ''">
+                </span>
+            </div>
+            <div class="col-4"></div>
         </div>
 
         <p-footer>

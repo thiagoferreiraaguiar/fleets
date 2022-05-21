@@ -23,19 +23,28 @@
 
 <br>
 
-<p-table styleClass="p-datatable-sm p-datatable-striped" responsiveLayout="scroll" [value]="perfils"
-  selectionMode="single" dataKey="id" (onRowSelect)="exibirDadosPerfil($event)" [paginator]="true" [rows]="rows"
-  [showCurrentPageReport]="true" currentPageReportTemplate="Exibindo {first} a {last} de {totalRecords} perfis">
+<p-table styleClass="p-datatable-sm p-datatable-striped" responsiveLayout="scroll" [value]="perfils" dataKey="id"
+  [paginator]="true" [rows]="rows" [showCurrentPageReport]="true"
+  currentPageReportTemplate="Exibindo {first} a {last} de {totalRecords} perfis">
   <ng-template pTemplate="header">
     <tr>
-      <th  style="width: 30%;text-align: center;">Sigla</th>
-      <th style="text-align: center;">Descrição</th>
+      <th style="width: 30%;text-align: center;">Sigla</th>
+      <th style="width: 62%;text-align: center;">Descrição</th>
+      <th style="width: 8%;"></th>
     </tr>
   </ng-template>
   <ng-template pTemplate="body" let-perfil>
     <tr [pSelectableRow]="perfil">
       <td style="text-align: center;">{{perfil.sigla}}</td>
       <td style="text-align: center;">{{perfil.descricao}}</td>
+      <td style="text-align: center;">
+        <p-button styleClass="p-button-link" icon="pi pi-pencil" title="editar"></p-button>
+        <p-button styleClass="p-button-link" icon="pi pi-trash" title="excluir"
+          (click)="excluir(perfil.id,perfil.descricao)"></p-button>
+      </td>
     </tr>
   </ng-template>
 </p-table>
+
+<p-confirmDialog></p-confirmDialog>
+<p-toast></p-toast>
