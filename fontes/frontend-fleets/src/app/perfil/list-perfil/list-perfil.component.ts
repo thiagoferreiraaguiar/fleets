@@ -19,21 +19,17 @@ export class ListPerfilComponent implements OnInit {
 
   // campos pesquisa
   filtro: string = "";
+  perfils: Perfil[] = [];
 
   //formulario
   form: FormGroup = new FormGroup({});
   isAtualizacao: boolean = false;
-
-  // paginas
-  pageForm: string = "/form-perfil";
-  pageList: string = "/list-perfil";
+  showModal: boolean = false;
+  textoButton: string = "";
 
   //paginacao
   first: number = 0;
   rows: number = 6;
-
-  perfils: Perfil[] = [];
-  showModal: boolean = false;
 
   ngOnInit() {
     // criar formulario
@@ -53,6 +49,7 @@ export class ListPerfilComponent implements OnInit {
 
   public exibirDados(perfil: Perfil) {
     this.isAtualizacao = true;
+    this.textoButton = "Atualizar";
     this.showModal = true;
     this.form.setValue({
       id: perfil.id,
@@ -62,6 +59,7 @@ export class ListPerfilComponent implements OnInit {
   }
 
   public novo(): void {
+    this.textoButton = "Cadastrar";
     this.isAtualizacao = true;
     this.showModal = true;
     this.form.reset();
