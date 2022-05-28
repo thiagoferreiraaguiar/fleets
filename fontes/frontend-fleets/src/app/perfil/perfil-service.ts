@@ -16,10 +16,9 @@ export class PerfilService {
     return this.http.get<Perfil[]>(this.url + "/perfis/");
   }
 
-  public pesquisarPerfil(sigla: string, descricao: string): Observable<Perfil[]> {
+  public pesquisarPerfil(parametro: string): Observable<Perfil[]> {
     const params = new HttpParams()
-      .set('sigla', sigla)
-      .set('descricao', descricao);
+      .set('parametro', parametro);
 
     return this.http.get<Perfil[]>(this.url + '/perfis/filter', { params });
   }

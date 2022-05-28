@@ -1,0 +1,82 @@
+<p-panel header="Perfil">
+  <div class="grid p-fluid">
+    <div class="col-3"></div>
+    <div class="col-6">
+      <div class="p-inputgroup">
+        <input id="pesquisa" name="pesquisa" type="text" pInputText [(ngModel)]="filtro" placeholder="Pesquisar" />
+        <p-button icon="pi pi-search" class="espacoButton" title="pesquisar" (click)="pesquisar()"></p-button>
+        <p-button icon="pi pi-plus" label="Novo" title="cadastrar" (click)="novo()"></p-button>
+      </div>
+    </div>
+    <div class="col-3"></div>
+  </div>
+</p-panel>
+
+<br>
+
+<p-table styleClass="p-datatable-sm p-datatable-striped" responsiveLayout="scroll" [value]="perfils" dataKey="id"
+  [paginator]="true" [rows]="rows" [showCurrentPageReport]="true"
+  currentPageReportTemplate="Exibindo {first} a {last} de {totalRecords} perfis">
+  <ng-template pTemplate="header">
+    <tr>
+      <th style="width: 30%;text-align: center;">Sigla</th>
+      <th style="width: 58%;text-align: center;">Descrição</th>
+      <th style="width: 12%;"></th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-perfil>
+    <tr [pSelectableRow]="perfil">
+      <td style="text-align: center;">{{perfil.sigla}}</td>
+      <td style="text-align: center;">{{perfil.descricao}}</td>
+      <td style="text-align: center;">
+        <p-button styleClass="p-button-link" icon="pi pi-pencil" title="editar" (click)="exibirDados(perfil)">
+        </p-button>
+        <p-button styleClass="p-button-link" icon="pi pi-trash" title="excluir"
+          (click)="excluir(perfil.id,perfil.descricao)"></p-button>
+      </td>
+    </tr>
+  </ng-template>
+</p-table>
+
+<form *ngIf="isAtualizacao" [formGroup]="form" (ngSubmit)="cadastrar()">
+  <p-dialog header="Perfil" [(visible)]="showModal" [modal]="true" [style]="{width: '70vw'}" [draggable]="false"
+    [resizable]="false">
+    <input type="hidden" id="id" name="id" pInputText formControlName="id">
+    <br>
+    <div class="grid p-fluid">
+      <div class="field col-12 md:col-3">
+        <span class="p-float-label">
+          <input id="sigla" name="sigla" type="text" pInputText formControlName="sigla">
+          <label for="sigla">Sigla</label>
+        </span>
+      </div>
+      <div class="field col-12 md:col-9">
+        <span class="p-float-label">
+          <input id="descricao" name="descricao" type="text" pInputText formControlName="descricao" />
+          <label for="descricao">Descrição</label>
+        </span>
+      </div>
+    </div>
+    <div class="grid p-fluid">
+      <div class="col-3">
+        <span style="color: red;" *ngIf="!form.controls['sigla'].valid && form.controls['sigla'].dirty" [innerHTML]="form.get('sigla')?.errors?.['required'] ? 'Campo obrigatório' 
+                  : form.get('sigla')?.errors?.['minlength'] ? 'O número mínimo de caracteres é 3' 
+                  : form.get('sigla')?.errors?.['maxlength'] ? 'O número máximo de caracteres é 10' 
+                  : ''">
+        </span>
+      </div>
+      <div class="col-9">
+        <span style="color: red;" *ngIf="!form.controls['descricao'].valid && form.controls['descricao'].dirty"
+          [innerHTML]="form.get('descricao')?.errors?.['required'] ? 'Campo obrigatório' 
+                  : ''">
+        </span>
+      </div>
+    </div>
+    <ng-template pTemplate="footer">
+      <p-button icon="pi pi-save" [label]="textoButton" type="submit" [disabled]="!form.valid"></p-button>
+    </ng-template>
+  </p-dialog>
+</form>
+
+<p-confirmDialog></p-confirmDialog>
+<p-toast></p-toast>
