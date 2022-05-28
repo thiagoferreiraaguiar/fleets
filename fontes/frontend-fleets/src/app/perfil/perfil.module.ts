@@ -1,9 +1,9 @@
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { PerfilService } from '../perfil-service';
-import { ListPerfilComponent } from './list-perfil.component';
+import { PerfilService } from './perfil-service';
+import { PerfilComponent } from './perfil.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ListPerfilRoutingModule } from './list-perfil-routing.module';
+import { PerfilRoutingModule } from './perfil-routing.module';
 import { PanelModule } from 'primeng/panel';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
@@ -15,10 +15,10 @@ import { DialogModule } from 'primeng/dialog';
 
 
 @NgModule({
-  declarations: [ListPerfilComponent],
+  declarations: [PerfilComponent],
   imports: [
     CommonModule,
-    ListPerfilRoutingModule,
+    PerfilRoutingModule,
     PanelModule,
     ButtonModule,
     InputTextModule,
@@ -29,7 +29,7 @@ import { DialogModule } from 'primeng/dialog';
     ReactiveFormsModule,
     TableModule,
   ],
-  exports: [ListPerfilComponent],
+  exports: [PerfilComponent],
   providers: [PerfilService, MessageService, ConfirmationService]
 })
 export class ListPerfilModule { }

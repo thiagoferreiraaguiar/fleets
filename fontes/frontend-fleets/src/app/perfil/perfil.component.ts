@@ -1,15 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { Perfil } from 'src/app/model/perfil';
-import { PerfilService } from '../perfil-service';
+
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { PerfilService } from './perfil-service';
 
 @Component({
-  selector: 'app-list-perfil',
-  templateUrl: './list-perfil.component.html',
-  styleUrls: ['./list-perfil.component.css']
+  selector: 'app-perfil',
+  templateUrl: './perfil.component.html',
+  styleUrls: ['./perfil.component.css']
 })
-export class ListPerfilComponent implements OnInit {
+export class PerfilComponent implements OnInit {
 
   constructor(
     private perfilService: PerfilService,
