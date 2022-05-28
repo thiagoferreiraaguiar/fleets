@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { Perfil } from 'src/app/model/perfil';
 import { PerfilService } from '../perfil-service';
-import { ConfirmationService, ConfirmEventType, MessageService } from 'primeng/api';
+import { ConfirmationService, MessageService } from 'primeng/api';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-list-perfil',
@@ -13,14 +13,16 @@ export class ListPerfilComponent implements OnInit {
 
   constructor(
     private perfilService: PerfilService,
-    private router: Router,
     private confirmationService: ConfirmationService,
     private messageService: MessageService
   ) { }
 
   // campos pesquisa
-  sigla: string = "";
-  descricao: string = "";
+  filtro: string = "";
+
+  //formulario
+  form: FormGroup = new FormGroup({});
+  isAtualizacao: boolean = false;
 
   // paginas
   pageForm: string = "/form-perfil";
@@ -31,22 +33,50 @@ export class ListPerfilComponent implements OnInit {
   rows: number = 6;
 
   perfils: Perfil[] = [];
+  showModal: boolean = false;
 
   ngOnInit() {
+    // criar formulario
+    this.createForm();
+
     // listar todos perfils
     this.perfilService.listarTodos().subscribe((response: Perfil[]) => {
       this.perfils = response;
     });
   }
 
-  public pesquisarPerfil() {
-    this.perfilService.pesquisarPerfil(this.sigla, this.descricao).subscribe((response: Perfil[]) => {
+  public pesquisar() {
+    this.perfilService.pesquisarPerfil(this.filtro).subscribe((response: Perfil[]) => {
       this.perfils = response;
     });
   }
 
-  public exibirDadosPerfil(event: any) {
-    this.router.navigate([this.pageForm + "/" + event.data.id]);
+  public exibirDados(perfil: Perfil) {
+    this.isAtualizacao = true;
+    this.showModal = true;
+    this.form.setValue({
+      id: perfil.id,
+      sigla: perfil.sigla,
+      descricao: perfil.descricao
+    })
+  }
+
+  public novo(): void {
+    this.isAtualizacao = true;
+    this.showModal = true;
+    this.form.reset();
+  }
+
+  public cadastrar(): void {
+    this.perfilService.cadastrarPerfil(this.form.value).subscribe((response: Perfil) => {
+      if (response != null) {
+        this.showModal = false;
+        this.pesquisar();
+        this.messageService.add({ severity: 'success', detail: 'Perfil cadastrado com sucesso!' });
+      }
+    }, err => {
+      this.messageService.add({ severity: 'error', detail: 'Não foi possível cadastrar o perfil.' });
+    });
   }
 
   public excluir(id: number, descricao: string) {
@@ -59,11 +89,19 @@ export class ListPerfilComponent implements OnInit {
       accept: () => {
         this.perfilService.excluirPerfil(id).subscribe(() => {
           this.messageService.add({ severity: 'success', detail: 'Perfil excluido com sucesso!' });
-          this.pesquisarPerfil();
+          this.pesquisar();
         }, err => {
           this.messageService.add({ severity: 'error', detail: 'Não foi possível excluir o perfil.' });
         });
       }
+    });
+  }
+
+  private createForm() {
+    this.form = new FormGroup({
+      id: new FormControl(),
+      sigla: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(10)]),
+      descricao: new FormControl('', Validators.required)
     });
   }
 

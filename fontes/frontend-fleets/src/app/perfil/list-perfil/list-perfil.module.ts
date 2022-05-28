@@ -1,4 +1,4 @@
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PerfilService } from '../perfil-service';
 import { ListPerfilComponent } from './list-perfil.component';
 import { NgModule } from '@angular/core';
@@ -11,6 +11,8 @@ import { TableModule } from 'primeng/table';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ToastModule } from 'primeng/toast';
+import { DialogModule } from 'primeng/dialog';
+
 
 @NgModule({
   declarations: [ListPerfilComponent],
@@ -21,9 +23,11 @@ import { ToastModule } from 'primeng/toast';
     ButtonModule,
     InputTextModule,
     ConfirmDialogModule,
+    DialogModule,
     ToastModule,
     FormsModule,
-    TableModule
+    ReactiveFormsModule,
+    TableModule,
   ],
   exports: [ListPerfilComponent],
   providers: [PerfilService, MessageService, ConfirmationService]
