@@ -1,17 +1,17 @@
 import { Usuario } from 'src/app/model/usuario';
 import { Perfil } from 'src/app/model/perfil';
 import { PerfilService } from 'src/app/perfil/perfil-service';
-import { UsuarioService } from './../usuario.service';
+import { UsuarioService } from './usuario.service';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ConfirmationService, MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-list-usuario',
-  templateUrl: './list-usuario.component.html',
-  styleUrls: ['./list-usuario.component.css']
+  templateUrl: './usuario.component.html',
+  styleUrls: ['./usuario.component.css']
 })
-export class ListUsuarioComponent implements OnInit {
+export class UsuarioComponent implements OnInit {
 
   constructor(
     private usuarioService: UsuarioService,

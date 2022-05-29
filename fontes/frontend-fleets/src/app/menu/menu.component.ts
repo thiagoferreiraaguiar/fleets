@@ -30,7 +30,7 @@ export class MenuComponent implements OnInit {
         label: "Acesso", icon: "pi pi-user",
         items: [
           { label: "Perfil", routerLink: ['/perfil'] },
-          { label: "Usuário", routerLink: ['/list-usuario'] },
+          { label: "Usuário", routerLink: ['/usuario'] },
         ]
       },
       {
