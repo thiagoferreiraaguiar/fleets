@@ -1,5 +1,5 @@
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { PerfilService } from './perfil-service';
+import { PerfilService } from './perfil.service';
 import { PerfilComponent } from './perfil.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -32,4 +32,4 @@ import { DialogModule } from 'primeng/dialog';
   exports: [PerfilComponent],
   providers: [PerfilService, MessageService, ConfirmationService]
 })
-export class ListPerfilModule { }
+export class PerfilModule { }

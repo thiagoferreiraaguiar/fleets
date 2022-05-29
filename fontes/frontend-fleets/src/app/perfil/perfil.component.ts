@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Perfil } from 'src/app/model/perfil';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { PerfilService } from './perfil-service';
+import { PerfilService } from './perfil.service';
 
 @Component({
   selector: 'app-perfil',

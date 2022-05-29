@@ -36,7 +36,7 @@ export class MenuComponent implements OnInit {
       {
         label: "Cadastro", icon: "pi pi-file",
         items: [
-          { label: "Cotação" },
+          { label: "Cotação", routerLink: ['/cotacao'] },
           { label: "Histórico" }
         ]
       }

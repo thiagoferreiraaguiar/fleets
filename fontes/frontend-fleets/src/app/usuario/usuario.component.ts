@@ -1,6 +1,6 @@
 import { Usuario } from 'src/app/model/usuario';
 import { Perfil } from 'src/app/model/perfil';
-import { PerfilService } from 'src/app/perfil/perfil-service';
+import { PerfilService } from 'src/app/perfil/perfil.service';
 import { UsuarioService } from './usuario.service';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';

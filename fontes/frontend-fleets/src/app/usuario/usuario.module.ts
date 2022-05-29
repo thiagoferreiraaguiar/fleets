@@ -41,4 +41,4 @@ import { CheckboxModule } from 'primeng/checkbox';
   exports: [UsuarioComponent],
   providers: [UsuarioService, MessageService, ConfirmationService]
 })
-export class ListUsuarioModule { }
+export class UsuarioModule { }
