@@ -1,51 +1,30 @@
 <p-panel header="Usuário">
     <div class="grid p-fluid">
-        <div class="col-3">
-            <label for="sigla">Nome</label>
+        <div class="col-3"></div>
+        <div class="col-6">
+            <div class="p-inputgroup">
+                <input id="pesquisa" name="pesquisa" type="text" pInputText [(ngModel)]="filtro"
+                    placeholder="Pesquisar" />
+                <p-button icon="pi pi-search" class="espacoButton" title="pesquisar" (click)="pesquisar()"></p-button>
+                <p-button icon="pi pi-plus" label="Novo" title="cadastrar" (click)="novo()"></p-button>
+            </div>
         </div>
-        <div class="col-5">
-            <label for="sigla">Email</label>
-        </div>
-        <div class="col-3">
-            <label for="sigla">Perfil</label>
-        </div>
-        <div class="col-1">
-            <label for="sigla">Status</label>
-        </div>
-        <div class="col-3">
-            <input id="nome" name="nome" type="text" pInputText [(ngModel)]="nome" />
-        </div>
-        <div class="col-5">
-            <input id="email" name="email" type="text" pInputText [(ngModel)]="email" />
-        </div>
-        <div class="col-3">
-            <p-dropdown [options]="perfis" [(ngModel)]="perfilSelecionado" placeholder="Selecione" optionLabel="descricao"
-                [showClear]="true"></p-dropdown>
-        </div>
-        <div class="col-1 field-checkbox">
-            <p-triStateCheckbox [(ngModel)]="ativo" label="{{labelStatus}}" (onChange)="onChangeStatus()">
-            </p-triStateCheckbox>
-        </div>
+        <div class="col-3"></div>
     </div>
-    <p-footer>
-        <div style="text-align: right;">
-            <p-button class="espacoButton" icon="pi pi-file" label="Novo" [routerLink]="pageForm"></p-button>
-            <p-button icon="pi pi-search" label="Pesquisar" (click)="pesquisarUsuario()"></p-button>
-        </div>
-    </p-footer>
 </p-panel>
 
 <br>
 
-<p-table styleClass="p-datatable-sm p-datatable-striped" responsiveLayout="scroll" [value]="usuarios"
-    selectionMode="single" dataKey="id" (onRowSelect)="exibirDadosUsuario($event)" [paginator]="true" [rows]="rows"
-    [showCurrentPageReport]="true" currentPageReportTemplate="Exibindo {first} a {last} de {totalRecords} usuários">
+<p-table styleClass="p-datatable-sm p-datatable-striped" responsiveLayout="scroll" [value]="usuarios" dataKey="id"
+    [paginator]="true" [rows]="rows" [showCurrentPageReport]="true"
+    currentPageReportTemplate="Exibindo {first} a {last} de {totalRecords} usuários">
     <ng-template pTemplate="header">
         <tr>
             <th style="width: 30%;text-align: center;">Nome</th>
-            <th style="width: 40%;text-align: center;">Email</th>
+            <th style="width: 30%;text-align: center;">Email</th>
             <th style="width: 20%;text-align: center;">Perfil</th>
             <th style="width: 10%;text-align: center;">Status</th>
+            <th style="width: 10%;"></th>
         </tr>
     </ng-template>
     <ng-template pTemplate="body" let-usuario>
@@ -53,7 +32,121 @@
             <td style="text-align: center;">{{usuario.nome}}</td>
             <td style="text-align: center;">{{usuario.email}}</td>
             <td style="text-align: center;">{{usuario.perfil.descricao}}</td>
-            <td style="text-align: center;">{{usuario.ativo ? 'Ativo' : 'Inativo'}}</td>
+            <td style="text-align: center;">
+                <i class="pi"
+                    [ngClass]="{'true-icon pi-check-circle': usuario.ativo, 'false-icon pi-times-circle': !usuario.ativo}"
+                    [ngStyle]="{'color': usuario.ativo ? 'green' : 'red'}"></i>
+            </td>
+            <td style="text-align: center;">
+                <p-button styleClass="p-button-link" icon="pi pi-pencil" title="editar" (click)="exibirDados(usuario)">
+                </p-button>
+                <p-button styleClass="p-button-link" icon="pi pi-trash" title="excluir"
+                    (click)="excluir(usuario.id,usuario.nome)"></p-button>
+            </td>
         </tr>
     </ng-template>
 </p-table>
+
+<form *ngIf="isAtualizacao" [formGroup]="form" (ngSubmit)="cadastrar()">
+    <p-dialog header="Usuário" [(visible)]="showModal" [modal]="true" [style]="{width: '90vw'}" [draggable]="false"
+        [resizable]="false">
+        <input type="hidden" id="id" name="id" pInputText formControlName="id">
+        <br>
+        <div class="grid p-fluid">
+            <div class="field col-12 md:col-4">
+                <span class="p-float-label">
+                    <input id="nome" name="nome" type="text" pInputText formControlName="nome" />
+                    <label for="nome">Nome</label>
+                </span>
+            </div>
+            <div class="field col-12 md:col-4">
+                <span class="p-float-label">
+                    <input id="email'" name="email" type="email" pInputText formControlName="email" />
+                    <label for="email">E-mail</label>
+                </span>
+            </div>
+            <div class="field col-12 md:col-4">
+                <span class="p-float-label">
+                    <p-inputMask id="cpf" mask="999.999.999-99" name="cpf" formControlName="cpf"></p-inputMask>
+                    <label for="cpf">CPF</label>
+                </span>
+            </div>
+        </div>
+        <div class="grid p-fluid">
+            <div class="col-4">
+                <span style="color: red;" *ngIf="!form.controls['nome'].valid && form.controls['nome'].dirty"
+                    [innerHTML]="form.get('nome')?.errors?.['required'] ? 'Campo obrigatório' 
+                        : ''">
+                </span>
+            </div>
+            <div class="col-4">
+                <span style="color: red;" *ngIf="!form.controls['email'].valid && form.controls['email'].dirty"
+                    [innerHTML]="form.get('email')?.errors?.['required'] ? 'Campo obrigatório' 
+                        : ''">
+                </span>
+            </div>
+            <div class="col-4">
+                <span style="color: red;" *ngIf="!form.controls['cpf'].valid && form.controls['cpf'].dirty" [innerHTML]="form.get('cpf')?.errors?.['required'] ? 'Campo obrigatório' 
+                        : ''">
+                </span>
+            </div>
+        </div>
+        <div class="grid p-fluid">
+            <div class="field col-12 md:col-4">
+                <span class="p-float-label">
+                    <p-dropdown [options]="perfis" [(ngModel)]="perfilSelecionado" placeholder="Selecione"
+                        optionLabel="descricao" [showClear]="true" formControlName="perfil" id="perfil" name="perfil">
+                    </p-dropdown>
+                    <label for="perfil">Perfil</label>
+                </span>
+            </div>
+            <div class="field col-12 md:col-4">
+                <span class="p-float-label">
+                    <input id="senha" name="senha" type="password" pInputText formControlName="senha" />
+                    <label for="senha">Senha</label>
+                </span>
+            </div>
+            <div class="field col-12 md:col-4">
+                <span class="p-float-label">
+                    <input id="confirmaSenha" name="confirmaSenha" type="password" pInputText
+                        formControlName="confirmaSenha" />
+                    <label for="confirmaSenha">Confirma Senha</label>
+                </span>
+            </div>
+        </div>
+        <div class="grid p-fluid">
+            <div class="col-4">
+                <span style="color: red;" *ngIf="!form.controls['perfil'].valid && form.controls['perfil'].dirty"
+                    [innerHTML]="form.get('perfil')?.errors?.['required'] ? 'Campo obrigatório' 
+                        : ''">
+                </span>
+            </div>
+            <div class="col-4">
+                <span style="color: red;" *ngIf="!form.controls['senha'].valid && form.controls['senha'].dirty"
+                    [innerHTML]="form.get('senha')?.errors?.['minlength'] ? 'O número mínimo de caracteres é 4' 
+                    : form.get('senha')?.errors?.['maxlength'] ? 'O número máximo de caracteres é 10' 
+                    : ''">
+                </span>
+            </div>
+            <div class="col-4">
+                <span style="color: red;"
+                    *ngIf="!form.controls['confirmaSenha'].valid && form.controls['confirmaSenha'].dirty" [innerHTML]="form.get('confirmaSenha')?.errors?.['minlength'] ? 'O número mínimo de caracteres é 4' 
+                    : form.get('confirmaSenha')?.errors?.['maxlength'] ? 'O número máximo de caracteres é 10' 
+                    : ''">
+                </span>
+            </div>
+        </div>
+        <div class="grid p-fluid">
+            <div class="field col-12 md:col-12">
+                <p-checkbox [binary]="true" formControlName="ativo" label="Ativo">
+                </p-checkbox>
+            </div>
+        </div>
+        <ng-template pTemplate="footer">
+            <p-button icon="pi pi-save" [label]="textoButton" type="submit" [disabled]="!form.valid"></p-button>
+        </ng-template>
+    </p-dialog>
+</form>
+
+<p-confirmDialog></p-confirmDialog>
+<p-toast></p-toast>

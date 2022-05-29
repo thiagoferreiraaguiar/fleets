@@ -16,12 +16,9 @@ export class UsuarioService {
     return this.http.get<Usuario[]>(this.url + "/usuarios/");
   }
 
-  public pesquisarUsuario(nome: string, email: string, idPerfil: number, ativo: any): Observable<Usuario[]> {
+  public pesquisarUsuario(parametro: string): Observable<Usuario[]> {
     const params = new HttpParams()
-      .set('nome', nome)
-      .set('email', email)
-      .set('idPerfil', idPerfil)
-      .set('ativo', (ativo == null ? '' : (ativo ? 'true' : 'false')));
+      .set('parametro', parametro);
 
     return this.http.get<Usuario[]>(this.url + '/usuarios/filter', { params });
   }

@@ -3,7 +3,8 @@ import { Perfil } from 'src/app/model/perfil';
 import { PerfilService } from 'src/app/perfil/perfil-service';
 import { UsuarioService } from './../usuario.service';
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { ConfirmationService, MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-list-usuario',
@@ -15,32 +16,29 @@ export class ListUsuarioComponent implements OnInit {
   constructor(
     private usuarioService: UsuarioService,
     private perfilService: PerfilService,
-    private router: Router
+    private confirmationService: ConfirmationService,
+    private messageService: MessageService
   ) { }
 
   // campos pesquisa
-  nome: string = "";
-  email: string = "";
+  filtro: string = "";
+  usuarios: Usuario[] = [];
+  perfis: Perfil[] = [];
+
+  //formulario
+  form: FormGroup = new FormGroup({});
+  isAtualizacao: boolean = false;
+  showModal: boolean = false;
+  textoButton: string = "";
   perfilSelecionado: Perfil = new Perfil();
-  ativo: boolean = true;
-  labelStatus: string = "";
 
   //paginacao
   first: number = 0;
-  rows: number = 0;
-
-  // paginas
-  pageForm: string = "";
-  perfis: Perfil[] = [];
-
-  usuarios: Usuario[] = [];
+  rows: number = 6;
 
   ngOnInit() {
-    this.ativo = true;
-    this.labelStatus = "Ativo";
-    this.pageForm = "/form-usuario";
-    this.first = 0;
-    this.rows = 6;
+    // criar formulario
+    this.createForm();
 
     //preenche combo perfil
     this.perfilService.listarTodos().subscribe((response: Perfil[]) => {
@@ -53,29 +51,79 @@ export class ListUsuarioComponent implements OnInit {
     });
   }
 
-  public pesquisarUsuario() {
-    let idPerfil: number = 0;
-    if (this.perfilSelecionado != null) {
-      idPerfil = this.perfilSelecionado.id;
-    }
-
-    this.usuarioService.pesquisarUsuario(this.nome, this.email, idPerfil, this.ativo).subscribe((response: Usuario[]) => {
+  public pesquisar() {
+    this.usuarioService.pesquisarUsuario(this.filtro).subscribe((response: Usuario[]) => {
       this.usuarios = response;
     });
   }
 
-  public exibirDadosUsuario(event: any) {
-    this.router.navigate([this.pageForm + "/" + event.data.id]);
+  public exibirDados(usuario: Usuario) {
+    console.log(usuario);
+    
+    this.isAtualizacao = true;
+    this.textoButton = "Atualizar";
+    this.showModal = true;
+
+    this.form.setValue({
+      id: usuario.id,
+      nome: usuario.nome,
+      perfil: usuario.perfil,
+      cpf: usuario.cpf,
+      email: usuario.email,
+      senha: '',
+      confirmaSenha: '',
+      ativo: usuario.ativo
+    });
   }
 
-  public onChangeStatus() {
-    if (this.ativo == null) {
-      this.labelStatus = "Todos";
-    } else if (this.ativo) {
-      this.labelStatus = "Ativo";
-    } else {
-      this.labelStatus = "Inativo";
-    }
+  public novo(): void {
+    this.textoButton = "Cadastrar";
+    this.isAtualizacao = true;
+    this.showModal = true;
+    this.form.reset();
+  }
+
+  public cadastrar(): void {
+    this.usuarioService.cadastrarUsuario(this.form.value).subscribe((response: Usuario) => {
+      if (response != null) {
+        this.showModal = false;
+        this.pesquisar();
+        this.messageService.add({ severity: 'success', detail: 'Usuário cadastrado com sucesso!' });
+      }
+    }, err => {
+      this.messageService.add({ severity: 'error', detail: 'Não foi possível cadastrar o usuário.' });
+    });
+  }
+
+  public excluir(id: number, nome: string): void {
+    this.confirmationService.confirm({
+      message: 'Deseja excluir o usuário <b>' + nome + '</b> ?',
+      header: 'Exclusão',
+      icon: 'pi pi-info-circle',
+      acceptLabel: 'Sim',
+      rejectLabel: "Não",
+      accept: () => {
+        this.usuarioService.excluirUsuario(id).subscribe(() => {
+          this.messageService.add({ severity: 'success', detail: 'Usuário excluído com sucesso!' });
+          this.pesquisar();
+        }, err => {
+          this.messageService.add({ severity: 'error', detail: 'Não foi possível excluir o usuário.' });
+        });
+      }
+    });
+  }
+
+  private createForm() {
+    this.form = new FormGroup({
+      id: new FormControl(),
+      nome: new FormControl('', [Validators.required]),
+      email: new FormControl('', Validators.required),
+      cpf: new FormControl('', [Validators.required]),
+      perfil: new FormControl('', [Validators.required]),
+      ativo: new FormControl(true),
+      senha: new FormControl('', [Validators.minLength(4), Validators.maxLength(10)]),
+      confirmaSenha: new FormControl('', [Validators.minLength(4), Validators.maxLength(10)]),
+    });
   }
 
   next() {
@@ -97,6 +145,5 @@ export class ListUsuarioComponent implements OnInit {
   isFirstPage(): boolean {
     return this.usuarios ? this.first === 0 : true;
   }
-
 
 }
