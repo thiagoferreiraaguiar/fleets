@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Perfil } from 'src/app/model/perfil';
-
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { PerfilService } from './perfil-service';
@@ -52,6 +51,7 @@ export class PerfilComponent implements OnInit {
     this.isAtualizacao = true;
     this.textoButton = "Atualizar";
     this.showModal = true;
+
     this.form.setValue({
       id: perfil.id,
       sigla: perfil.sigla,
