@@ -1,14 +1,14 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { CotacaoRoutingModule } from './cotacao-routing.module';
+import { FormCotacaoRoutingModule } from './form-cotacao-routing.module';
 
 
 @NgModule({
   declarations: [],
   imports: [
     CommonModule,
-    CotacaoRoutingModule
+    FormCotacaoRoutingModule
   ]
 })
-export class CotacaoModule { }
+export class FormCotacaoModule { }

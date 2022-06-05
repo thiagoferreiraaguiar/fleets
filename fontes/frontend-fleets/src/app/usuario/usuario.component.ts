@@ -57,9 +57,7 @@ export class UsuarioComponent implements OnInit {
     });
   }
 
-  public exibirDados(usuario: Usuario) {
-    console.log(usuario);
-    
+  public exibirDados(usuario: Usuario) {    
     this.isAtualizacao = true;
     this.textoButton = "Atualizar";
     this.showModal = true;

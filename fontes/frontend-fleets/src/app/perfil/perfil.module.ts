@@ -12,6 +12,7 @@ import { ConfirmationService, MessageService } from 'primeng/api';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ToastModule } from 'primeng/toast';
 import { DialogModule } from 'primeng/dialog';
+import { DividerModule } from 'primeng/divider';
 
 
 @NgModule({
@@ -28,6 +29,7 @@ import { DialogModule } from 'primeng/dialog';
     FormsModule,
     ReactiveFormsModule,
     TableModule,
+    DividerModule
   ],
   exports: [PerfilComponent],
   providers: [PerfilService, MessageService, ConfirmationService]
