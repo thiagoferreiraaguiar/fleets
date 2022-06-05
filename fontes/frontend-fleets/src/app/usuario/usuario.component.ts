@@ -85,11 +85,9 @@ export class UsuarioComponent implements OnInit {
 
   public cadastrar(): void {
     this.usuarioService.cadastrarUsuario(this.form.value).subscribe((response: Usuario) => {
-      if (response != null) {
         this.showModal = false;
         this.pesquisar();
         this.messageService.add({ severity: 'success', detail: 'Usuário cadastrado com sucesso!' });
-      }
     }, err => {
       this.messageService.add({ severity: 'error', detail: 'Não foi possível cadastrar o usuário.' });
     });

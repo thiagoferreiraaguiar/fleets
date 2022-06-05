@@ -68,11 +68,9 @@ export class PerfilComponent implements OnInit {
 
   public cadastrar(): void {
     this.perfilService.cadastrarPerfil(this.form.value).subscribe((response: Perfil) => {
-      if (response != null) {
         this.showModal = false;
         this.pesquisar();
         this.messageService.add({ severity: 'success', detail: 'Perfil cadastrado com sucesso!' });
-      }
     }, err => {
       this.messageService.add({ severity: 'error', detail: 'Não foi possível cadastrar o perfil.' });
     });
