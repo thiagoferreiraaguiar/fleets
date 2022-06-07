@@ -12,7 +12,7 @@ import { PerfilService } from './perfil.service';
 export class PerfilComponent implements OnInit {
 
   constructor(
-    private perfilService: PerfilService,
+    private service: PerfilService,
     private confirmationService: ConfirmationService,
     private messageService: MessageService
   ) { }
@@ -36,13 +36,13 @@ export class PerfilComponent implements OnInit {
     this.createForm();
 
     // listar todos perfils
-    this.perfilService.listarTodos().subscribe((response: Perfil[]) => {
+    this.service.listarTodos().subscribe((response: Perfil[]) => {
       this.perfils = response;
     });
   }
 
   public pesquisar() {
-    this.perfilService.pesquisarPerfil(this.filtro).subscribe((response: Perfil[]) => {
+    this.service.pesquisarPerfil(this.filtro).subscribe((response: Perfil[]) => {
       this.perfils = response;
     });
   }
@@ -67,7 +67,7 @@ export class PerfilComponent implements OnInit {
   }
 
   public cadastrar(): void {
-    this.perfilService.cadastrarPerfil(this.form.value).subscribe((response: Perfil) => {
+    this.service.cadastrarPerfil(this.form.value).subscribe((response: Perfil) => {
         this.showModal = false;
         this.pesquisar();
         this.messageService.add({ severity: 'success', detail: 'Perfil cadastrado com sucesso!' });
@@ -84,7 +84,7 @@ export class PerfilComponent implements OnInit {
       acceptLabel: 'Sim',
       rejectLabel: "Não",
       accept: () => {
-        this.perfilService.excluirPerfil(id).subscribe(() => {
+        this.service.excluirPerfil(id).subscribe(() => {
           this.messageService.add({ severity: 'success', detail: 'Perfil excluido com sucesso!' });
           this.pesquisar();
         }, err => {

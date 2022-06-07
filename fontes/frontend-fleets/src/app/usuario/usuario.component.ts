@@ -14,7 +14,7 @@ import { ConfirmationService, MessageService } from 'primeng/api';
 export class UsuarioComponent implements OnInit {
 
   constructor(
-    private usuarioService: UsuarioService,
+    private service: UsuarioService,
     private perfilService: PerfilService,
     private confirmationService: ConfirmationService,
     private messageService: MessageService
@@ -46,13 +46,13 @@ export class UsuarioComponent implements OnInit {
     });
 
     // listar todos usuarios
-    this.usuarioService.listarTodos().subscribe((response: Usuario[]) => {
+    this.service.listarTodos().subscribe((response: Usuario[]) => {
       this.usuarios = response;
     });
   }
 
   public pesquisar() {
-    this.usuarioService.pesquisarUsuario(this.filtro).subscribe((response: Usuario[]) => {
+    this.service.pesquisarUsuario(this.filtro).subscribe((response: Usuario[]) => {
       this.usuarios = response;
     });
   }
@@ -82,7 +82,7 @@ export class UsuarioComponent implements OnInit {
   }
 
   public cadastrar(): void {
-    this.usuarioService.cadastrarUsuario(this.form.value).subscribe((response: Usuario) => {
+    this.service.cadastrarUsuario(this.form.value).subscribe((response: Usuario) => {
         this.showModal = false;
         this.pesquisar();
         this.messageService.add({ severity: 'success', detail: 'Usuário cadastrado com sucesso!' });
@@ -99,7 +99,7 @@ export class UsuarioComponent implements OnInit {
       acceptLabel: 'Sim',
       rejectLabel: "Não",
       accept: () => {
-        this.usuarioService.excluirUsuario(id).subscribe(() => {
+        this.service.excluirUsuario(id).subscribe(() => {
           this.messageService.add({ severity: 'success', detail: 'Usuário excluído com sucesso!' });
           this.pesquisar();
         }, err => {
