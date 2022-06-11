@@ -1,1 +1,279 @@
-<p>form-cotacao works!</p>
+<p-panel header="Cotação">
+    <div class="p-fluid grid formgrid">
+        <div class="field col-12 md:col-2">
+            <div class="field-radiobutton">
+                <p-radioButton name="groupname" value="A" [(ngModel)]="tipoCadastro"
+                    (onClick)="onClickTipoCadastro($event)" inputId="automatico"></p-radioButton>
+                <label for="automatico">Cadastro Automático</label>
+            </div>
+        </div>
+        <div class="field col-12 md:col-10">
+            <div class="field-radiobutton">
+                <p-radioButton name="groupname" value="M" [(ngModel)]="tipoCadastro"
+                    (onClick)="onClickTipoCadastro($event)" inputId="manual"></p-radioButton>
+                <label for="manual">Cadastro Manual</label>
+            </div>
+        </div>
+    </div>
+</p-panel>
+
+<br>
+
+<p-fileUpload [hidden]="ocultaCadastroAutomatico" name="demo[]" url="./upload.php" (onUpload)="onUpload($event)"
+    accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet">
+    <ng-template pTemplate="content">
+        <ul *ngIf="uploadedFiles.length">
+            <li *ngFor="let file of uploadedFiles">{{file.name}} - {{file.size}} bytes</li>
+        </ul>
+    </ng-template>
+</p-fileUpload>
+
+<div [hidden]="true">
+    <br>
+    <p-progressBar mode="indeterminate" [style]="{'height': '6px'}"></p-progressBar>
+</div>
+
+<p-card [hidden]="!ocultaCadastroAutomatico">
+    <p-tabView>
+        <p-tabPanel header="Header 1">
+            <div class="grid p-fluid">
+                <div class="field col-12 md:col-4">
+                    <span class="p-float-label">
+                        <p-calendar id="vigenciaInicial" [showIcon]="true" inputId="icon"></p-calendar>
+                        <label for="vigenciaInicial">Vigência inicial</label>
+                    </span>
+                </div>
+                <div class="field col-12 md:col-4">
+                    <span class="p-float-label">
+                        <p-calendar id="vigenciaFinal" [showIcon]="true" inputId="icon"></p-calendar>
+                        <label for="vigenciaFinal">Vigência final</label>
+                    </span>
+                </div>
+                <div class="field col-12 md:col-4">
+                    <span class="p-float-label">
+                        <input id="placa" type="text" pInputText />
+                        <label for="placa">Placa</label>
+                    </span>
+                </div>
+            </div>
+            <div class="grid p-fluid">
+                <div class="field col-12 md:col-4">
+                    <span class="p-float-label">
+                        <input id="chassi" type="text" pInputText />
+                        <label for="chassi">Chassi</label>
+                    </span>
+                </div>
+                <div class="field col-12 md:col-4">
+                    <span class="p-float-label">
+                        <input id="codigoFipe" type="text" pInputText />
+                        <label for="codigoFipe">Código Fipe</label>
+                    </span>
+                </div>
+                <div class="field col-12 md:col-4">
+                    <span class="p-float-label">
+                        <input id="marca" type="text" pInputText />
+                        <label for="marca">Marca</label>
+                    </span>
+                </div>
+            </div>
+            <div class="grid p-fluid">
+                <div class="field col-12 md:col-4">
+                    <span class="p-float-label">
+                        <input id="modelo" type="text" pInputText />
+                        <label for="modelo">Modelo</label>
+                    </span>
+                </div>
+                <div class="field col-12 md:col-4">
+                    <span class="p-float-label">
+                        <span class="p-float-label">
+                            <p-calendar id="anoFabricacao" [showIcon]="true" view="year" dateFormat="yy" inputId="icon">
+                            </p-calendar>
+                            <label for="anoFabricacao">Ano de fabricação</label>
+                        </span>
+                    </span>
+                </div>
+                <div class="field col-12 md:col-4">
+                    <span class="p-float-label">
+                        <span class="p-float-label">
+                            <p-calendar id="anoModelo" [showIcon]="true" view="year" dateFormat="yy" inputId="icon">
+                            </p-calendar>
+                            <label for="anoModelo">Ano do Modelo</label>
+                        </span>
+                    </span>
+                </div>
+            </div>
+        </p-tabPanel>
+        <p-tabPanel header="Header 2">
+            <div class="grid p-fluid">
+                <div class="field col-12 md:col-4">
+                    <span class="p-float-label">
+                        <input id="combustivel" type="text" pInputText />
+                        <label for="combustivel">Combustivel</label>
+                    </span>
+                </div>
+                <div class="field col-12 md:col-4">
+                    <span class="p-float-label">
+                        <input id="classeBonus" type="text" pInputText />
+                        <label for="classeBonus">Classe Bônus</label>
+                    </span>
+                </div>
+                <div class="field col-12 md:col-4">
+                    <span class="p-float-label">
+                        <p-dropdown id="tipo" optionLabel="name" [showClear]="true"></p-dropdown>
+                        <label for="tipo">Tipo</label>
+                    </span>
+                </div>
+            </div>
+            <div class="grid p-fluid">
+                <div class="field col-12 md:col-4">
+                    <span class="p-float-label">
+                        <p-dropdown id="uf" optionLabel="name" [showClear]="true"></p-dropdown>
+                        <label for="uf">Uf</label>
+                    </span>
+                </div>
+                <div class="field col-12 md:col-4">
+                    <span class="p-float-label">
+                        <p-dropdown id="cidade" optionLabel="name" [showClear]="true"></p-dropdown>
+                        <label for="cidade">Cidade</label>
+                    </span>
+                </div>
+                <div class="field col-12 md:col-4">
+                    <span class="p-float-label">
+                        <input id="cobertura" type="text" pInputText />
+                        <label for="cobertura">Cobertura</label>
+                    </span>
+                </div>
+            </div>
+            <div class="grid p-fluid">
+                <div class="field col-12 md:col-4">
+                    <span class="p-float-label">
+                        <input id="lmiCasco" type="text" pInputText />
+                        <label for="lmiCasco">LMI casco</label>
+                    </span>
+                </div>
+                <div class="field col-12 md:col-4">
+                    <span class="p-float-label">
+                        <input id="lmiAcessorios" type="text" pInputText />
+                        <label for="lmiAcessorios">LMI acessório</label>
+                    </span>
+                </div>
+                <div class="field col-12 md:col-4">
+                    <span class="p-float-label">
+                        <input id="lmiEquipamentos" type="text" pInputText />
+                        <label for="lmiEquipamentos">LMI equipamentos</label>
+                    </span>
+                </div>
+            </div>
+        </p-tabPanel>
+        <p-tabPanel header="Header 3">
+            <div class="grid p-fluid">
+                <div class="field col-12 md:col-4">
+                    <span class="p-float-label">
+                        <input id="lmiBlindagem" type="text" pInputText />
+                        <label for="lmiBlindagem">LMI blindagem</label>
+                    </span>
+                </div>
+                <div class="field col-12 md:col-4">
+                    <span class="p-float-label">
+                        <input id="lmiKitGas" type="text" pInputText />
+                        <label for="lmiKitGas">LMI kit gás</label>
+                    </span>
+                </div>
+                <div class="field col-12 md:col-4">
+                    <span class="p-float-label">
+                        <input id="lmiAparelhosPort" type="text" pInputText />
+                        <label for="lmiAparelhosPort">LMI aparelhos</label>
+                    </span>
+                </div>
+            </div>
+            <div class="grid p-fluid">
+                <div class="field col-12 md:col-4">
+                    <span class="p-float-label">
+                        <input id="vinteQuatroHoras" type="text" pInputText />
+                        <label for="vinteQuatroHoras">24H</label>
+                    </span>
+                </div>
+                <div class="field col-12 md:col-4">
+                    <span class="p-float-label">
+                        <input id="carroReserva" type="text" pInputText />
+                        <label for="carroReserva">Carro Reserva</label>
+                    </span>
+                </div>
+                <div class="field col-12 md:col-4">
+                    <span class="p-float-label">
+                        <input id="coberturaVidros" type="text" pInputText />
+                        <label for="coberturaVidros">Cobertura de Vidros</label>
+                    </span>
+                </div>
+            </div>
+            <div class="grid p-fluid">
+                <div class="field col-12 md:col-4">
+                    <span class="p-float-label">
+                        <input id="extensaoNovo" type="text" pInputText />
+                        <label for="extensaoNovo">Extensão Novo</label>
+                    </span>
+                </div>
+                <div class="field col-12 md:col-4">
+                    <span class="p-float-label">
+                        <input id="lmiDanosMorais" type="text" pInputText />
+                        <label for="lmiDanosMorais">LMI danos mórais</label>
+                    </span>
+                </div>
+                <div class="field col-12 md:col-4">
+                    <span class="p-float-label">
+                        <input id="lmiRctrDanosMoraisTerceiros" type="text" pInputText />
+                        <label for="lmiRctrDanosMoraisTerceiros">LMI terceiros</label>
+                    </span>
+                </div>
+            </div>
+        </p-tabPanel>
+        <p-tabPanel header="Header 4">
+            <div class="grid p-fluid">
+                <div class="field col-12 md:col-4">
+                    <span class="p-float-label">
+                        <input id="rctrClaus" type="text" pInputText />
+                        <label for="rctrClaus">RCTR Claus</label>
+                    </span>
+                </div>
+                <div class="field col-12 md:col-4">
+                    <span class="p-float-label">
+                        <p-inputNumber id="lmiAppMorte" mode="currency" currency="BRL" locale="pt" inputId="integeronly"></p-inputNumber>
+                        <label for="lmiAppMorte">LMI app morte</label>
+                    </span>
+                </div>
+                <div class="field col-12 md:col-4">
+                    <span class="p-float-label">
+                        <input id="tipoFranquia" type="text" pInputText />
+                        <label for="tipoFranquia">Tipo franquia</label>
+                    </span>
+                </div>
+            </div>
+            <div class="grid p-fluid">
+                <div class="field col-12 md:col-4">
+                    <span class="p-float-label">
+                        <p-inputNumber id="valorFranquiaInformada" mode="currency" currency="BRL" locale="pt" inputId="integeronly">
+                        </p-inputNumber>
+                        <label for="valorFranquiaInformada">Valor Franquia</label>
+                    </span>
+                </div>
+                <div class="field col-12 md:col-4">
+                    <span class="p-float-label">
+                        <input id="comissao" type="text" pInputText />
+                        <label for="comissao">Comissão</label>
+                    </span>
+                </div>
+                <div class="field col-12 md:col-4">
+                    <span class="p-float-label">
+                        <p-inputNumber id="premioTerceiros" mode="currency" currency="BRL" locale="pt" inputId="integeronly"></p-inputNumber>
+                        <label for="premioTerceiros">Danos Morais Terceiros</label>
+                    </span>
+                </div>
+            </div>
+        </p-tabPanel>
+    </p-tabView>
+    <ng-template pTemplate="footer">
+        <div style="text-align: right;">
+            <p-button label="Cadastrar" icon="pi pi-save"></p-button>
+        </div>
+    </ng-template>
+</p-card>
