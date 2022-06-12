@@ -17,6 +17,7 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { InputMaskModule } from 'primeng/inputmask';
 import { CalendarModule } from 'primeng/calendar';
 import { CheckboxModule } from 'primeng/checkbox';
+import { DividerModule } from 'primeng/divider';
 
 @NgModule({
   declarations: [UsuarioComponent],
@@ -36,9 +37,10 @@ import { CheckboxModule } from 'primeng/checkbox';
     ToastModule,
     InputMaskModule,
     CalendarModule,
-    CheckboxModule
+    CheckboxModule,
+    DividerModule
   ],
   exports: [UsuarioComponent],
   providers: [UsuarioService, MessageService, ConfirmationService]
 })
-export class ListUsuarioModule { }
+export class UsuarioModule { }

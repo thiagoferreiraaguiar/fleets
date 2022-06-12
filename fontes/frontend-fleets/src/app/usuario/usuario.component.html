@@ -50,6 +50,7 @@
 <form *ngIf="isAtualizacao" [formGroup]="form" (ngSubmit)="cadastrar()">
     <p-dialog header="Usuário" [(visible)]="showModal" [modal]="true" [style]="{width: '90vw'}" [draggable]="false"
         [resizable]="false">
+        <p-divider></p-divider>
         <input type="hidden" id="id" name="id" pInputText formControlName="id">
         <br>
         <div class="grid p-fluid">

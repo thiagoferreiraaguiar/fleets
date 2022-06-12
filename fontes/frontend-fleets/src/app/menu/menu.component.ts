@@ -10,8 +10,6 @@ import { MenuItem } from 'primeng/api';
 export class MenuComponent implements OnInit {
 
   items: MenuItem[] = [];
-  itemsUsuario: MenuItem[] = [];
-  siglaNome: string = "";
   usuarioLogado: UsuarioLogado = new UsuarioLogado();
   infoUsuarios: string = "";
 
@@ -20,7 +18,8 @@ export class MenuComponent implements OnInit {
   ngOnInit() {
     this.addItensMenu();
     this.usuarioLogado = UsuarioLogado.getInstance();
-    this.usuarioLogado.exibeMenu.subscribe((show: boolean) => {});
+    this.usuarioLogado.exibeMenu.subscribe((show: boolean) => { });
+    this.infoUsuarios = this.usuarioLogado.usuario.email;
   }
 
   private addItensMenu(): void {
@@ -36,15 +35,10 @@ export class MenuComponent implements OnInit {
       {
         label: "Cadastro", icon: "pi pi-file",
         items: [
-          { label: "Cotação" },
-          { label: "Histórico" }
+          { label: "Cotação", routerLink: ['/form-cotacao'] },
+          { label: "Histórico", routerLink: ['/list-cotacao'] },
         ]
       }
     ];
   }
-
-  public getInformacaoesUsuario(){
-    this.infoUsuarios = this.usuarioLogado.usuario.email;
-  }
-
 }

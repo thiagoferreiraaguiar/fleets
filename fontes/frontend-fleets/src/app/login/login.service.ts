@@ -2,7 +2,6 @@ import { JwtAutenticationRequest } from './../model/jwt-autentication-request';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/internal/Observable';
-import { ResponseEntity } from '../model/response-entity';
 import { CurrentUser } from '../model/current-user';
 
 @Injectable({
