@@ -35,11 +35,11 @@ export class CotacaoService {
     return this.http.delete(this.url + "/cotacoes/" + idCotacao);
   }
 
-  public onUpload(file: File) {
+  public onUpload(file: File, idUsuario: number) {
     const formData = new FormData();
     formData.append('file', file);
 
-    return this.http.post(this.url + "/upload-arquivo", formData);
+    return this.http.post(this.url + "/upload-arquivo/" + idUsuario, formData);
   }
 
 }

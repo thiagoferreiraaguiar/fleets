@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MessageService } from 'primeng/api';
+import { UsuarioLogado } from 'src/app/model/usuario-logado';
 import { CotacaoService } from '../cotacao.service';
 
 @Component({
@@ -18,8 +19,10 @@ export class FormCotacaoComponent implements OnInit {
   tipoVeiculo: string = "Novo";
   checked: boolean = true;
   ocultaCadastroAutomatico: boolean = false;
+  usuarioLogado: UsuarioLogado = new UsuarioLogado();
 
   ngOnInit(): void {
+    this.usuarioLogado = UsuarioLogado.getInstance();
   }
 
   onClickTipoCadastro(event: any) {
@@ -40,8 +43,9 @@ export class FormCotacaoComponent implements OnInit {
 
   public onUpload(event: any) {
     const file: File = event.target.files[0];
+    const idUsuario = this.usuarioLogado.usuario.id;
 
-    this.service.onUpload(file).subscribe(() => {
+    this.service.onUpload(file, idUsuario).subscribe(() => {
       this.messageService.add({ severity: 'success', detail: 'Planilha processada com sucesso!' });
     }, err => {
       this.messageService.add({ severity: 'error', detail: 'Não foi possível processar a planilha.' });
