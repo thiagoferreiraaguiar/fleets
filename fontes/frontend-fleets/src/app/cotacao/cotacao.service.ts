@@ -34,4 +34,12 @@ export class CotacaoService {
   public excluirCotacao(idCotacao: number) {
     return this.http.delete(this.url + "/cotacoes/" + idCotacao);
   }
+
+  public onUpload(file: File) {
+    const formData = new FormData();
+    formData.append('file', file);
+
+    return this.http.post(this.url + "/upload-arquivo", formData);
+  }
+
 }

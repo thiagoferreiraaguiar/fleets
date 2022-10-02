@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { MessageService } from 'primeng/api';
+import { CotacaoService } from '../cotacao.service';
 
 @Component({
   selector: 'app-form-cotacao',
@@ -7,9 +9,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FormCotacaoComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private service: CotacaoService,
+    private messageService: MessageService
+  ) { }
 
-  uploadedFiles: any[] = [];
   tipoCadastro: string = "A";
   tipoVeiculo: string = "Novo";
   checked: boolean = true;
@@ -34,10 +38,14 @@ export class FormCotacaoComponent implements OnInit {
     }
   }
 
-  onUpload(event: any) {
-    for (let file of event.files) {
-      this.uploadedFiles.push(file);
-    }
+  public onUpload(event: any) {
+    const file: File = event.target.files[0];
+
+    this.service.onUpload(file).subscribe(() => {
+      this.messageService.add({ severity: 'success', detail: 'Planilha processada com sucesso!' });
+    }, err => {
+      this.messageService.add({ severity: 'error', detail: 'Não foi possível processar a planilha.' });
+    });
   }
 
 }

@@ -19,14 +19,8 @@
 
 <br>
 
-<p-fileUpload [hidden]="ocultaCadastroAutomatico" name="demo[]" url="./upload.php" (onUpload)="onUpload($event)"
+<input [hidden]="ocultaCadastroAutomatico" type="file" (change)="onUpload($event)" 
     accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet">
-    <ng-template pTemplate="content">
-        <ul *ngIf="uploadedFiles.length">
-            <li *ngFor="let file of uploadedFiles">{{file.name}} - {{file.size}} bytes</li>
-        </ul>
-    </ng-template>
-</p-fileUpload>
 
 <div [hidden]="true">
     <br>
@@ -35,7 +29,7 @@
 
 <p-card [hidden]="!ocultaCadastroAutomatico">
     <p-tabView>
-        <p-tabPanel header="Header 1">
+        <p-tabPanel header="Casco">
             <div class="grid p-fluid">
                 <div class="field col-12 md:col-4">
                     <span class="p-float-label">
@@ -102,8 +96,6 @@
                     </span>
                 </div>
             </div>
-        </p-tabPanel>
-        <p-tabPanel header="Header 2">
             <div class="grid p-fluid">
                 <div class="field col-12 md:col-4">
                     <span class="p-float-label">
@@ -124,6 +116,8 @@
                     </span>
                 </div>
             </div>
+        </p-tabPanel>
+        <p-tabPanel header="Cobertura">
             <div class="grid p-fluid">
                 <div class="field col-12 md:col-4">
                     <span class="p-float-label">
@@ -141,48 +135,6 @@
                     <span class="p-float-label">
                         <input id="cobertura" type="text" pInputText />
                         <label for="cobertura">Cobertura</label>
-                    </span>
-                </div>
-            </div>
-            <div class="grid p-fluid">
-                <div class="field col-12 md:col-4">
-                    <span class="p-float-label">
-                        <input id="lmiCasco" type="text" pInputText />
-                        <label for="lmiCasco">LMI casco</label>
-                    </span>
-                </div>
-                <div class="field col-12 md:col-4">
-                    <span class="p-float-label">
-                        <input id="lmiAcessorios" type="text" pInputText />
-                        <label for="lmiAcessorios">LMI acessório</label>
-                    </span>
-                </div>
-                <div class="field col-12 md:col-4">
-                    <span class="p-float-label">
-                        <input id="lmiEquipamentos" type="text" pInputText />
-                        <label for="lmiEquipamentos">LMI equipamentos</label>
-                    </span>
-                </div>
-            </div>
-        </p-tabPanel>
-        <p-tabPanel header="Header 3">
-            <div class="grid p-fluid">
-                <div class="field col-12 md:col-4">
-                    <span class="p-float-label">
-                        <input id="lmiBlindagem" type="text" pInputText />
-                        <label for="lmiBlindagem">LMI blindagem</label>
-                    </span>
-                </div>
-                <div class="field col-12 md:col-4">
-                    <span class="p-float-label">
-                        <input id="lmiKitGas" type="text" pInputText />
-                        <label for="lmiKitGas">LMI kit gás</label>
-                    </span>
-                </div>
-                <div class="field col-12 md:col-4">
-                    <span class="p-float-label">
-                        <input id="lmiAparelhosPort" type="text" pInputText />
-                        <label for="lmiAparelhosPort">LMI aparelhos</label>
                     </span>
                 </div>
             </div>
@@ -215,30 +167,8 @@
                 </div>
                 <div class="field col-12 md:col-4">
                     <span class="p-float-label">
-                        <input id="lmiDanosMorais" type="text" pInputText />
-                        <label for="lmiDanosMorais">LMI danos mórais</label>
-                    </span>
-                </div>
-                <div class="field col-12 md:col-4">
-                    <span class="p-float-label">
-                        <input id="lmiRctrDanosMoraisTerceiros" type="text" pInputText />
-                        <label for="lmiRctrDanosMoraisTerceiros">LMI terceiros</label>
-                    </span>
-                </div>
-            </div>
-        </p-tabPanel>
-        <p-tabPanel header="Header 4">
-            <div class="grid p-fluid">
-                <div class="field col-12 md:col-4">
-                    <span class="p-float-label">
                         <input id="rctrClaus" type="text" pInputText />
                         <label for="rctrClaus">RCTR Claus</label>
-                    </span>
-                </div>
-                <div class="field col-12 md:col-4">
-                    <span class="p-float-label">
-                        <p-inputNumber id="lmiAppMorte" mode="currency" currency="BRL" locale="pt" inputId="integeronly"></p-inputNumber>
-                        <label for="lmiAppMorte">LMI app morte</label>
                     </span>
                 </div>
                 <div class="field col-12 md:col-4">
@@ -251,7 +181,8 @@
             <div class="grid p-fluid">
                 <div class="field col-12 md:col-4">
                     <span class="p-float-label">
-                        <p-inputNumber id="valorFranquiaInformada" mode="currency" currency="BRL" locale="pt" inputId="integeronly">
+                        <p-inputNumber id="valorFranquiaInformada" mode="currency" currency="BRL" locale="pt"
+                            inputId="integeronly">
                         </p-inputNumber>
                         <label for="valorFranquiaInformada">Valor Franquia</label>
                     </span>
@@ -264,8 +195,72 @@
                 </div>
                 <div class="field col-12 md:col-4">
                     <span class="p-float-label">
-                        <p-inputNumber id="premioTerceiros" mode="currency" currency="BRL" locale="pt" inputId="integeronly"></p-inputNumber>
+                        <p-inputNumber id="premioTerceiros" mode="currency" currency="BRL" locale="pt"
+                            inputId="integeronly"></p-inputNumber>
                         <label for="premioTerceiros">Danos Morais Terceiros</label>
+                    </span>
+                </div>
+            </div>
+        </p-tabPanel>
+        <p-tabPanel header="LMI">
+            <div class="grid p-fluid">
+                <div class="field col-12 md:col-4">
+                    <span class="p-float-label">
+                        <input id="lmiCasco" type="text" pInputText />
+                        <label for="lmiCasco">LMI casco</label>
+                    </span>
+                </div>
+                <div class="field col-12 md:col-4">
+                    <span class="p-float-label">
+                        <input id="lmiAcessorios" type="text" pInputText />
+                        <label for="lmiAcessorios">LMI acessório</label>
+                    </span>
+                </div>
+                <div class="field col-12 md:col-4">
+                    <span class="p-float-label">
+                        <input id="lmiEquipamentos" type="text" pInputText />
+                        <label for="lmiEquipamentos">LMI equipamentos</label>
+                    </span>
+                </div>
+            </div>
+            <div class="grid p-fluid">
+                <div class="field col-12 md:col-4">
+                    <span class="p-float-label">
+                        <input id="lmiBlindagem" type="text" pInputText />
+                        <label for="lmiBlindagem">LMI blindagem</label>
+                    </span>
+                </div>
+                <div class="field col-12 md:col-4">
+                    <span class="p-float-label">
+                        <input id="lmiKitGas" type="text" pInputText />
+                        <label for="lmiKitGas">LMI kit gás</label>
+                    </span>
+                </div>
+                <div class="field col-12 md:col-4">
+                    <span class="p-float-label">
+                        <input id="lmiAparelhosPort" type="text" pInputText />
+                        <label for="lmiAparelhosPort">LMI aparelhos</label>
+                    </span>
+                </div>
+            </div>
+            <div class="grid p-fluid">
+                <div class="field col-12 md:col-4">
+                    <span class="p-float-label">
+                        <p-inputNumber id="lmiAppMorte" mode="currency" currency="BRL" locale="pt"
+                            inputId="integeronly"></p-inputNumber>
+                        <label for="lmiAppMorte">LMI app morte</label>
+                    </span>
+                </div>
+                <div class="field col-12 md:col-4">
+                    <span class="p-float-label">
+                        <input id="lmiDanosMorais" type="text" pInputText />
+                        <label for="lmiDanosMorais">LMI danos mórais</label>
+                    </span>
+                </div>
+                <div class="field col-12 md:col-4">
+                    <span class="p-float-label">
+                        <input id="lmiRctrDanosMoraisTerceiros" type="text" pInputText />
+                        <label for="lmiRctrDanosMoraisTerceiros">LMI terceiros</label>
                     </span>
                 </div>
             </div>

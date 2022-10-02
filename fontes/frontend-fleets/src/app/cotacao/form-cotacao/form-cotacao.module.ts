@@ -15,6 +15,7 @@ import { CalendarModule } from 'primeng/calendar';
 import { DropdownModule } from 'primeng/dropdown';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { ProgressBarModule } from 'primeng/progressbar';
+import { MessageService } from 'primeng/api';
 
 @NgModule({
   declarations: [FormCotacaoComponent],
@@ -35,6 +36,6 @@ import { ProgressBarModule } from 'primeng/progressbar';
     ProgressBarModule
   ],
   exports: [FormCotacaoComponent],
-  providers: [CotacaoService]
+  providers: [CotacaoService, MessageService]
 })
 export class FormCotacaoModule { }
