@@ -8,7 +8,7 @@ import { Cotacao } from '../model/cotacao';
 })
 export class CotacaoService {
 
-  url: string = "http://localhost:8080";
+  url: string = "https://api.fleetsseguros.cf";
 
   constructor(private http: HttpClient) { }
 

@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 })
 export class PerfilService {
 
-  url: string = "http://localhost:8080";
+  url: string = "https://api.fleetsseguros.cf";
 
   constructor(private http: HttpClient) { }
 

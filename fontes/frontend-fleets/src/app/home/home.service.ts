@@ -6,7 +6,7 @@ import { Injectable } from '@angular/core';
 })
 export class HomeService {
 
-  url: string = "http://localhost:8080";
+  url: string = "https://api.fleetsseguros.cf";
 
   constructor(private http: HttpClient) { }
 

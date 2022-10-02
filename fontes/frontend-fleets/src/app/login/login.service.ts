@@ -9,7 +9,7 @@ import { CurrentUser } from '../model/current-user';
 })
 export class LoginService {
 
-  url: string = "http://localhost:8080";
+  url: string = "https://api.fleetsseguros.cf";
 
   constructor(private http: HttpClient) { }
 
