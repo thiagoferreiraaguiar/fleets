@@ -20,9 +20,12 @@ export class FormCotacaoComponent implements OnInit {
   checked: boolean = true;
   ocultaCadastroAutomatico: boolean = false;
   usuarioLogado: UsuarioLogado = new UsuarioLogado();
+  ocultaProgressBar: boolean = true;
+
 
   ngOnInit(): void {
     this.usuarioLogado = UsuarioLogado.getInstance();
+    this.ocultaProgressBar = true;
   }
 
   onClickTipoCadastro(event: any) {
@@ -42,12 +45,16 @@ export class FormCotacaoComponent implements OnInit {
   }
 
   public onUpload(event: any) {
+    this.ocultaProgressBar = false;
     const file: File = event.target.files[0];
     const idUsuario = this.usuarioLogado.usuario.id;
-
-    this.service.onUpload(file, idUsuario).subscribe(() => {
+    
+    this.service.onUpload(file, idUsuario).subscribe((response: number) => {
+      console.log(response);
+      this.ocultaProgressBar = true;
       this.messageService.add({ severity: 'success', detail: 'Planilha processada com sucesso!' });
     }, err => {
+      this.ocultaProgressBar = true;
       this.messageService.add({ severity: 'error', detail: 'Não foi possível processar a planilha.' });
     });
   }

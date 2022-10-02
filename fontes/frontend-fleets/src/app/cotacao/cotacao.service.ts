@@ -39,7 +39,7 @@ export class CotacaoService {
     const formData = new FormData();
     formData.append('file', file);
 
-    return this.http.post(this.url + "/upload-arquivo/" + idUsuario, formData);
+    return this.http.post<number>(this.url + "/upload-arquivo/" + idUsuario, formData);
   }
 
 }

@@ -16,6 +16,7 @@ import { DropdownModule } from 'primeng/dropdown';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { ProgressBarModule } from 'primeng/progressbar';
 import { MessageService } from 'primeng/api';
+import { ToastModule } from 'primeng/toast';
 
 @NgModule({
   declarations: [FormCotacaoComponent],
@@ -33,7 +34,8 @@ import { MessageService } from 'primeng/api';
     CalendarModule,
     DropdownModule,
     InputNumberModule,
-    ProgressBarModule
+    ProgressBarModule,
+    ToastModule
   ],
   exports: [FormCotacaoComponent],
   providers: [CotacaoService, MessageService]

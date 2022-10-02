@@ -22,7 +22,7 @@
 <input [hidden]="ocultaCadastroAutomatico" type="file" (change)="onUpload($event)" 
     accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet">
 
-<div [hidden]="true">
+<div [hidden]="ocultaProgressBar">
     <br>
     <p-progressBar mode="indeterminate" [style]="{'height': '6px'}"></p-progressBar>
 </div>
@@ -272,3 +272,5 @@
         </div>
     </ng-template>
 </p-card>
+
+<p-toast></p-toast>
