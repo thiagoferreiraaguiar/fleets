@@ -8,6 +8,7 @@ export class Cotacao {
     public modelo: string = "";
     public cidade: string = "";
     public uf: string = "";
+    public nomeArquivo: string= "";
 
     constructor() { }
 
