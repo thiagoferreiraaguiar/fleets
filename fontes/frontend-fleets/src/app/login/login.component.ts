@@ -27,8 +27,8 @@ export class LoginComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.jwtAutenticationRequest.login = "thiagoferreiradeaguiar@gmail.com";
-    this.jwtAutenticationRequest.senha = "1234";
+    this.jwtAutenticationRequest.login = "";
+    this.jwtAutenticationRequest.senha = "";
 
     this.usuarioLogado = UsuarioLogado.getInstance();
     this.showMsgErro = false;
