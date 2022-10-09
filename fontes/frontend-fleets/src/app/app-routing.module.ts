@@ -8,7 +8,8 @@ const routes: Routes = [
   { path: 'perfil', loadChildren: () => import('src/app/perfil/perfil.module').then(m => m.PerfilModule), canActivate: [AuthGuard] },
   { path: 'usuario', loadChildren: () => import('src/app/usuario/usuario.module').then(m => m.UsuarioModule), canActivate: [AuthGuard] },
   { path: 'list-cotacao', loadChildren: () => import('src/app/cotacao/list-cotacao/list-cotacao.module').then(m => m.ListCotacaoModule), canActivate: [AuthGuard] },
-  { path: 'form-cotacao', loadChildren: () => import('src/app/cotacao/form-cotacao/form-cotacao.module').then(m => m.FormCotacaoModule), canActivate: [AuthGuard] }
+  { path: 'form-cotacao', loadChildren: () => import('src/app/cotacao/form-cotacao/form-cotacao.module').then(m => m.FormCotacaoModule), canActivate: [AuthGuard] },
+  { path: 'form-cotacao/:id', loadChildren: () => import('src/app/cotacao/form-cotacao/form-cotacao.module').then(m => m.FormCotacaoModule), canActivate: [AuthGuard] }
 ];
 
 @NgModule({

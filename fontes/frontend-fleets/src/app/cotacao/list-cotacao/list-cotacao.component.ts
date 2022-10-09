@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Cotacao } from 'src/app/model/cotacao';
 import { CotacaoService } from '../cotacao.service';
 
@@ -10,7 +11,8 @@ import { CotacaoService } from '../cotacao.service';
 export class ListCotacaoComponent implements OnInit {
 
   constructor(
-    private service: CotacaoService
+    private service: CotacaoService,
+    private router: Router
   ) { }
 
   // campos pesquisa
@@ -20,6 +22,8 @@ export class ListCotacaoComponent implements OnInit {
   //paginacao
   first: number = 0;
   rows: number = 6;
+
+  pageForm: string = "/form-cotacao";
 
   ngOnInit(): void {
 
@@ -39,6 +43,7 @@ export class ListCotacaoComponent implements OnInit {
   }
 
   public exibirDados(id: number): void {
+    this.router.navigate([this.pageForm + "/" + id]);
   }
 
   next() {
